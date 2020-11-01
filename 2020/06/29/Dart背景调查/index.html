@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Dart 背景调查 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Dart出世2011年10月10日，星期一，Goolgle发布了一篇名为《Dart: A language for structured web programming》（Dart：结构化的Web编程语言）的文章，公布Dart语言的出生。 设计初衷摘一段原文：  Dart’s design goals are:  Create a structured yet flexible language">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dart 背景调查">
+<meta property="og:url" content="http://yoursite.com/2020/06/29/Dart%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Dart出世2011年10月10日，星期一，Goolgle发布了一篇名为《Dart: A language for structured web programming》（Dart：结构化的Web编程语言）的文章，公布Dart语言的出生。 设计初衷摘一段原文：  Dart’s design goals are:  Create a structured yet flexible language">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933679225129.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933681049121.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933688221710.jpg">
+<meta property="article:published_time" content="2020-06-28T17:53:54.000Z">
+<meta property="article:modified_time" content="2020-07-05T10:16:14.305Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933679225129.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Dart 背景调查</h2>
+  <p class="sub">Jun 29, 2020</p>
+  <article class="content">
+    <h1 id="Dart出世"><a href="#Dart出世" class="headerlink" title="Dart出世"></a>Dart出世</h1><p>2011年10月10日，星期一，Goolgle发布了一篇名为《Dart: A language for structured web programming》（Dart：结构化的Web编程语言）的文章，公布Dart语言的出生。</p>
+<h1 id="设计初衷"><a href="#设计初衷" class="headerlink" title="设计初衷"></a>设计初衷</h1><p>摘一段原文：</p>
+<blockquote>
+<p>Dart’s design goals are:</p>
+<ul>
+<li><p>Create a structured yet flexible language for web programming.</p>
+</li>
+<li><p>Make Dart feel familiar and natural to programmers and thus easy to learn.</p>
+</li>
+<li><p>Ensure that Dart delivers high performance on all modern web browsers and environments ranging from small handheld devices to server-side execution.</p>
+</li>
+</ul>
+</blockquote>
+<p>Dart的设计目标是：</p>
+<ul>
+<li>创建用于Web编程的灵活结构化语言。</li>
+<li>在使用Dart的时候，让开发者感到熟悉和顺手，从而易于学习。</li>
+<li>确保Dart在所有移动设备、所有Web浏览器 以及服务器上提供高性能的服务。</li>
+</ul>
+<p>看的出来, Dart的设计就是冲着多平台统一语言来的，在ios、安卓、web页面、后台的开发上都有做不错的支持，尤其是客户端的开发，原来两份代码的工作，Dart可以用一份代码搞定，开发成本大大节省。</p>
+<h1 id="低谷"><a href="#低谷" class="headerlink" title="低谷"></a>低谷</h1><p>Dart如今虽然风光无限，但在其实直到2018年Dart还是”最啃爹语言榜首”，而且就业机会极少，为什么？因为没有可心竞争力。</p>
+<p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933679225129.jpg" alt=""></p>
+<p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933681049121.jpg" alt=""></p>
+<h1 id="新的纪元"><a href="#新的纪元" class="headerlink" title="新的纪元"></a>新的纪元</h1><p>2018年12月4日，谷歌发布Flutter 1.0版本，其标题为《Flutter 1.0: Google’s Portable UI Toolkit》（Flutter 1.0:谷歌的可移植UI工具箱），Flutter从此问世。</p>
+<p>Flutter的出现掀起来一波移动开发的热潮。使用它可以直接开发Android和iOS应用。其最大的特点就是一套代码多平台运行、高性能和Hot Reload（热重载）。谷歌即将发布Fuchsia系统就以Flutter为主要开发框架。Flutter采用Dart作为其底层语言。Dart也由于Flutter美好未来而得到众多开发者的青睐，从低谷一跃成为了2019年GIT上项目增长最多的语言。</p>
+<p>并且Flutter和Dart都是开源项目，这为深入理解和调试敞开了大门。</p>
+<p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/06/29/15933688221710.jpg" alt=""></p>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><ul>
+<li><p>Dart教程：</p>
+<ul>
+<li>Dart语法教程：<a href="https://www.dartcn.com/guides/language/language-tour" target="_blank" rel="noopener">https://www.dartcn.com/guides/language/language-tour</a></li>
+<li>视频教程：<a href="https://www.youtube.com/watch?v=Ej_Pcr4uC2Q&amp;t=1084s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=Ej_Pcr4uC2Q&amp;t=1084s</a></li>
+<li>官方文档：<a href="https://dart.dev/guides" target="_blank" rel="noopener">https://dart.dev/guides</a></li>
+<li>静态检查工具：<a href="https://dart.dev/guides/language/analysis-options" target="_blank" rel="noopener">https://dart.dev/guides/language/analysis-options</a></li>
+<li>《Effective Dart》 <a href="https://dart.cn/guides/language/effective-dart" target="_blank" rel="noopener">https://dart.cn/guides/language/effective-dart</a></li>
+<li>《Linter for Dart》<a href="https://dart-lang.github.io/linter/lints/index.html" target="_blank" rel="noopener">https://dart-lang.github.io/linter/lints/index.html</a></li>
+<li>《Dart Style Guide》<a href="http://dartdoc.takyam.com/articles/style-guide/" target="_blank" rel="noopener">http://dartdoc.takyam.com/articles/style-guide/</a></li>
+</ul>
+</li>
+<li><p>Flutter教程</p>
+<p>  <a href="https://www.youtube.com/watch?v=x0uinJvhNxI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=x0uinJvhNxI</a></p>
+</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>Dart的出世无疑是在全栈的高墙上搭了一把梯子，以后安卓 ios web 后台，4端的工作，只需要一个人就能完成了、，这可能会带来两个结果：1. 公司产能暴涨，有精力发展更多的产品。2. 公司的产能过剩，开发人力供大于求，裁员减招。希望我们都不会面临第二种情况。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/07/02/xcode%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC/" class="link f-fl">⟵xcode历史版本</a>
+    
+    
+      <a href="/2020/06/28/%E4%BA%BA%E8%82%89%E6%96%B9%E6%B3%95%E9%9A%8F%E8%AE%B0/" class="link f-fr">人肉方法随记⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

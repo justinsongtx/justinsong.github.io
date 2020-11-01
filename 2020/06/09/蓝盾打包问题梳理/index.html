@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>蓝盾打包问题梳理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="蓝盾打包问题梳理Ld &#x2F;Users&#x2F;bkdevops&#x2F;workspace&#x2F;p-a62516f9cdb041218e847a13e0879228&#x2F;src&#x2F;ios&#x2F;deriveddata&#x2F;Build&#x2F;Intermediates.noindex&#x2F;Pods.build&#x2F;Release-iphoneos&#x2F;TransferModule.build&#x2F;Objects-normal&#x2F;armv7&#x2F;Binary&#x2F;Tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝盾打包问题梳理">
+<meta property="og:url" content="http://yoursite.com/2020/06/09/%E8%93%9D%E7%9B%BE%E6%89%93%E5%8C%85%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="蓝盾打包问题梳理Ld &#x2F;Users&#x2F;bkdevops&#x2F;workspace&#x2F;p-a62516f9cdb041218e847a13e0879228&#x2F;src&#x2F;ios&#x2F;deriveddata&#x2F;Build&#x2F;Intermediates.noindex&#x2F;Pods.build&#x2F;Release-iphoneos&#x2F;TransferModule.build&#x2F;Objects-normal&#x2F;armv7&#x2F;Binary&#x2F;Tra">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-09T07:12:51.000Z">
+<meta property="article:modified_time" content="2020-06-21T14:37:42.606Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">蓝盾打包问题梳理</h2>
+  <p class="sub">Jun 9, 2020</p>
+  <article class="content">
+    <h1 id="蓝盾打包问题梳理"><a href="#蓝盾打包问题梳理" class="headerlink" title="蓝盾打包问题梳理"></a>蓝盾打包问题梳理</h1><h2 id="Ld-Users-bkdevops-workspace-p-a62516f9cdb041218e847a13e0879228-src-ios-deriveddata-Build-Intermediates-noindex-Pods-build-Release-iphoneos-TransferModule-build-Objects-normal-armv7-Binary-TransferModule-normal-armv7-1-failure"><a href="#Ld-Users-bkdevops-workspace-p-a62516f9cdb041218e847a13e0879228-src-ios-deriveddata-Build-Intermediates-noindex-Pods-build-Release-iphoneos-TransferModule-build-Objects-normal-armv7-Binary-TransferModule-normal-armv7-1-failure" class="headerlink" title="Ld /Users/bkdevops/workspace/p-a62516f9cdb041218e847a13e0879228/src/ios/deriveddata/Build/Intermediates.noindex/Pods.build/Release-iphoneos/TransferModule.build/Objects-normal/armv7/Binary/TransferModule normal armv7(1 failure)"></a>Ld /Users/bkdevops/workspace/p-a62516f9cdb041218e847a13e0879228/src/ios/deriveddata/Build/Intermediates.noindex/Pods.build/Release-iphoneos/TransferModule.build/Objects-normal/armv7/Binary/TransferModule normal armv7(1 failure)</h2><ul>
+<li><p>原因：<br>  TransferModule中缺少32位架构（armv7），此模块为log模块，其中使用的是微信提供的xlog组件，由于xlog不再支持32位架构，所以TransferModule中也没法支持。</p>
+</li>
+<li><p>解决：<br>  app中最低支持ios11，不支持32位架构无所谓的，直接在xcode中删掉armv7。</p>
+</li>
+</ul>
+<h2 id="flutter-pub-get-失败"><a href="#flutter-pub-get-失败" class="headerlink" title="flutter pub get 失败"></a>flutter pub get 失败</h2><p>Because flutter_caige depends on flutter_localizations any from sdk which depends on intl 0.16.1, intl 0.16.1 is required.<br>So, because flutter_caige depends on intl 0.16.0, version solving failed.</p>
+<ul>
+<li><p>原因：<br>  flutter版本冲突</p>
+</li>
+<li><p>解决：<br>  如果是两个依赖的依赖冲突，不清楚当前到底应该使用依赖的哪一个版本时，我们可以使用any来解决版本依赖版本冲突的问题。由于不推荐使用any依赖，我们需要在pubspec.lock中找到正确的版本替换。<br>如果还是提示冲突，我们可以在 pubspec.yaml 添加</p>
+</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/06/09/pod%20install%20%E8%AD%A6%E5%91%8A%E6%A2%B3%E7%90%86/" class="link f-fl">⟵pod install 警告梳理</a>
+    
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>App应对ATS限制策略 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="结果先行：本次应对ATS，兴趣部落App选择接入TBS库，由TBS全局拦截HTTP请求，改为套接字的方式收发请求后返回给上层。 问题背景  ATS(App Transport Security),是苹果在ＷＷＤＣ 15提出的，Apple 在推进网络通讯安全的一个重要方式，按照苹果的要求非https的网络访问是被禁止的；当然现阶段我们可以通过在info.plist里面中添加 NSAppTranspo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App应对ATS限制策略">
+<meta property="og:url" content="http://yoursite.com/2020/09/21/App%E5%BA%94%E5%AF%B9ATS%E9%99%90%E5%88%B6%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="结果先行：本次应对ATS，兴趣部落App选择接入TBS库，由TBS全局拦截HTTP请求，改为套接字的方式收发请求后返回给上层。 问题背景  ATS(App Transport Security),是苹果在ＷＷＤＣ 15提出的，Apple 在推进网络通讯安全的一个重要方式，按照苹果的要求非https的网络访问是被禁止的；当然现阶段我们可以通过在info.plist里面中添加 NSAppTranspo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://km.oa.com/files/photos/pictures/201704/1492570441_6_w1560_h1066.png">
+<meta property="og:image" content="http://km.oa.com/files/photos/pictures/201704/1492570498_68_w682_h1248.png">
+<meta property="og:image" content="http://km.oa.com/files/photos/pictures/201704/1492570514_71_w680_h1236.png">
+<meta property="article:published_time" content="2020-09-20T16:40:02.000Z">
+<meta property="article:modified_time" content="2020-09-20T16:40:26.972Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://km.oa.com/files/photos/pictures/201704/1492570441_6_w1560_h1066.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">App应对ATS限制策略</h2>
+  <p class="sub">Sep 21, 2020</p>
+  <article class="content">
+    <p><code>结果先行：本次应对ATS，兴趣部落App选择接入TBS库，由TBS全局拦截HTTP请求，改为套接字的方式收发请求后返回给上层。</code></p>
+<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>  ATS(App Transport Security),是苹果在ＷＷＤＣ 15提出的，Apple 在推进网络通讯安全的一个重要方式，按照苹果的要求非https的网络访问是被禁止的；当然现阶段我们可以通过在info.plist里面中添加 NSAppTransportSecurity 字典并且将 NSAllowsArbitraryLoads 设置为YES 来禁用 ATS。</p>
+<p>  不过在WWDC 16中，Apple明确表示将收紧http的访问，从2017年1月1日起，所有提交的app默认不允许使用NSAllowsArbitraryLoads 来绕过ATS的限制，这样对于浏览器、手Q、空间等需要访问大量第三方http站点的应用来说，提前解决ATS的问题就迫在眉睫。</p>
+<p>这一大推总结起来就是：app内不能再使用HTTP请求，否则有被下架的风险</p>
+<h2 id="有哪些解决办法？"><a href="#有哪些解决办法？" class="headerlink" title="有哪些解决办法？"></a>有哪些解决办法？</h2><ul>
+<li><p><code>替换app内所有http链接</code>，包涵所有app使用的链接和协议中下发的链接，并且要推动存储后台支持https协议－－－－－工作量较大，对存储后台有强依赖。</p>
+</li>
+<li><p><code>实现注册NSURLProtocol子类</code>，用代码实现拦截http请求，代码中自行请求数据，用套接字代替http请求－－－－－工作量巨大，安全性能无法预测。</p>
+</li>
+<li><p><code>使用TBS全局拦截http请求</code>，由TBS使用套接字请求数据后返回，上层完全无感知，手q等多款app已经接入，稳定至今－－－－－工作量小，无外部依赖，安装包增量23k左右，性能安全均优。</p>
+</li>
+</ul>
+<p>答案很明显：使用方案3，引入TBS</p>
+<p>##对TBS的了解与考量</p>
+<ul>
+<li><p><code>能否解决HTTP协议的限制</code></p>
+<p>    iOS– TBS通过接管webview的网络层请求，将请求通过SPDY协议发送到浏览器的后台代理服务器；后台代理服务器再通过骨干网络去对方服务器抓取数据；</p>
+<p>  TBS的架构图如下：<br><img src="http://km.oa.com/files/photos/pictures/201704/1492570441_6_w1560_h1066.png" alt=""></p>
+</li>
+</ul>
+<p>   浏览器使用的SPDY协议是基于底层socket自己实现的网络通信组件，没有使用任何Apple提供的网络组件，并且也不是http协议，所以能够完美解决ATS防止http的问题，并且SPDY协议本身是二进制协议，安全性强于HTTP；</p>
+<ul>
+<li><p><code>安全性</code></p>
+<ul>
+<li>解决运营商http网页劫持；TBS和浏览器后台代理之间是SPDY协议通道，运营商劫持代价很高，所以不会劫持；后台的代理服务器和网站的server之间是通过骨干网络访问也避免了运营商劫持；</li>
+<li>解决httpDNS的劫持；TBS和浏览器后台代理通过IP连接，HTTP请求到了后台的代理服务器才进行DNS解析，不给运营商DNS劫持机会；</li>
+<li>spdy协议本身是支持加密的；相对http来说，安全性也是可以得到保障的；</li>
+</ul>
+</li>
+<li><p><code>速度</code></p>
+<ul>
+<li>通过TBS和浏览器后台的长链接减少延时；</li>
+<li>HTTP Header也压缩减少数据传输；</li>
+<li>并发网络请求提高效率；</li>
+<li>指定请求优先级加快网页展示；</li>
+<li>后台还做了就快接入、图片压缩、资源缓存、广告过滤；</li>
+<li>spdy代理加速能力，在3G网络下网页访问速度有效提升 20% 到 30%；</li>
+</ul>
+</li>
+<li><p><code>安装包增量</code><br>    安装包增量23k</p>
+</li>
+<li><p><code>性能</code><br>    未发现性能问题</p>
+</li>
+<li><p><code>有哪些已经接入</code><br>    现在已有手Ｑ、京东、微云、空间、now直播等APP接入了TBS</p>
+</li>
+</ul>
+<p>小结：经各方面考虑，目前接入TBS在解决ATS问题上是最优选择。</p>
+<h2 id="接入"><a href="#接入" class="headerlink" title="接入"></a>接入</h2><ul>
+<li><p>SDK加入工程（SDK地址<a href="http://git.code.oa.com/QQBrowser_iOS/iOS_TBS_SDK" target="_blank" rel="noopener">http://git.code.oa.com/QQBrowser_iOS/iOS_TBS_SDK</a>）</p>
+</li>
+<li><p>添加所需要的依赖</p>
+<ul>
+<li>libz.tbd</li>
+<li>libstdc++.tbd</li>
+<li>WebKit.framework</li>
+</ul>
+</li>
+<li><p>实现QBProtocolWorker子类，实现<code>qbProxyProtocolCanInitWithRequest:isQBWebViewRequest:</code>函数，返回<code>YES</code>代表需要用SPDY协议代替当前的请求，反之返回<code>NO</code>。</p>
+<pre><code class="objectivec">  @implementation TBHttpProtocolWorker
+
+  + (BOOL) qbProxyProtocolCanInitWithRequest:(NSURLRequest *)request isQBWebViewRequest:(BOOL)isQBWebViewRequest
+  {
+      if (isQBWebViewRequest) {
+          return YES;
+      }
+
+      NSString* strUrl = [request.URL absoluteString];
+      if ([[TBATSUtil sharedInstance] isATSActive] &amp;&amp; [strUrl hasPrefix:@&quot;http://&quot;]) {
+          return YES;
+      }
+
+      return NO;
+  }
+
+  @end</code></pre>
+</li>
+<li><p>在app启动后注册我们的子类，开始监听http请求</p>
+<pre><code class="objectivec">  - (void)startTBSService
+  {
+      if (_isInit == NO &amp;&amp; [self isATSActive])
+      {
+          [QBWebViewHelper startProxyWithWorker:[TBHttpProtocolWorker class]];
+          _isInit = YES;
+      }
+  }</code></pre>
+<p>接入到此完成</p>
+</li>
+</ul>
+<p>##使用抓包工具验证</p>
+<ul>
+<li><p>接入前</p>
+<p> <img src="http://km.oa.com/files/photos/pictures/201704/1492570498_68_w682_h1248.png" alt=""></p>
+</li>
+<li><p>接入后<br> <img src="http://km.oa.com/files/photos/pictures/201704/1492570514_71_w680_h1236.png" alt=""></p>
+</li>
+</ul>
+<p>小结：绕过http请求，效果明显</p>
+<p>(完)</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/09/21/iOS-%E8%B6%8A%E7%8B%B1%E7%94%A8%E6%88%B7%E7%81%B0%E5%BA%A6%E6%B5%81%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="link f-fl">⟵iOS 越狱用户灰度流程&amp;&amp;常见问题列表</a>
+    
+    
+      <a href="/2020/09/21/App%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E9%87%8D%E6%9E%84/" class="link f-fr">App目录结构重构⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
