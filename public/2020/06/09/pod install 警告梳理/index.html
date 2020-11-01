@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pod install 警告梳理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="pod install 警告梳理[!] Unable to read the license file LICENSE for the spec HelperModule (0.0.38) 原因：  无法读LICENSE文件，  [!] CocoaPods did not set the base configuration of your project because your project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pod install 警告梳理">
+<meta property="og:url" content="http://yoursite.com/2020/06/09/pod%20install%20%E8%AD%A6%E5%91%8A%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="pod install 警告梳理[!] Unable to read the license file LICENSE for the spec HelperModule (0.0.38) 原因：  无法读LICENSE文件，  [!] CocoaPods did not set the base configuration of your project because your project">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-09T07:24:56.000Z">
+<meta property="article:modified_time" content="2020-06-21T14:48:19.149Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">pod install 警告梳理</h2>
+  <p class="sub">Jun 9, 2020</p>
+  <article class="content">
+    <h1 id="pod-install-警告梳理"><a href="#pod-install-警告梳理" class="headerlink" title="pod install 警告梳理"></a>pod install 警告梳理</h1><h2 id="Unable-to-read-the-license-file-LICENSE-for-the-spec-HelperModule-0-0-38"><a href="#Unable-to-read-the-license-file-LICENSE-for-the-spec-HelperModule-0-0-38" class="headerlink" title="[!] Unable to read the license file LICENSE for the spec HelperModule (0.0.38)"></a>[!] Unable to read the license file <code>LICENSE</code> for the spec <code>HelperModule (0.0.38)</code></h2><ul>
+<li>原因：<br>  无法读LICENSE文件，</li>
+</ul>
+<h2 id="CocoaPods-did-not-set-the-base-configuration-of-your-project-because-your-project-already-has-a-custom-config-set-In-order-for-CocoaPods-integration-to-work-at-all-please-either-set-the-base-configurations-of-the-target-Runner-to-Target-Support-Files-Pods-Runner-Pods-Runner-betarelease-xcconfig-or-include-the-Target-Support-Files-Pods-Runner-Pods-Runner-betarelease-xcconfig-in-your-build-configuration-Flutter-Release-xcconfig"><a href="#CocoaPods-did-not-set-the-base-configuration-of-your-project-because-your-project-already-has-a-custom-config-set-In-order-for-CocoaPods-integration-to-work-at-all-please-either-set-the-base-configurations-of-the-target-Runner-to-Target-Support-Files-Pods-Runner-Pods-Runner-betarelease-xcconfig-or-include-the-Target-Support-Files-Pods-Runner-Pods-Runner-betarelease-xcconfig-in-your-build-configuration-Flutter-Release-xcconfig" class="headerlink" title="[!] CocoaPods did not set the base configuration of your project because your project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target Runner to Target Support Files/Pods-Runner/Pods-Runner.betarelease.xcconfig or include the Target Support Files/Pods-Runner/Pods-Runner.betarelease.xcconfig in your build configuration (Flutter/Release.xcconfig)."></a>[!] CocoaPods did not set the base configuration of your project because your project already has a custom config set. In order for CocoaPods integration to work at all, please either set the base configurations of the target <code>Runner</code> to <code>Target Support Files/Pods-Runner/Pods-Runner.betarelease.xcconfig</code> or include the <code>Target Support Files/Pods-Runner/Pods-Runner.betarelease.xcconfig</code> in your build configuration (<code>Flutter/Release.xcconfig</code>).</h2><h2 id="The-Runner-Release-target-overrides-the-ALWAYS-EMBED-SWIFT-STANDARD-LIBRARIES-build-setting-defined-in-Pods-Target-Support-Files-Pods-Runner-Pods-Runner-release-xcconfig’-This-can-lead-to-problems-with-the-CocoaPods-installation"><a href="#The-Runner-Release-target-overrides-the-ALWAYS-EMBED-SWIFT-STANDARD-LIBRARIES-build-setting-defined-in-Pods-Target-Support-Files-Pods-Runner-Pods-Runner-release-xcconfig’-This-can-lead-to-problems-with-the-CocoaPods-installation" class="headerlink" title="[!] The Runner [Release] target overrides the ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES build setting defined in `Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig’. This can lead to problems with the CocoaPods installation"></a>[!] The <code>Runner [Release]</code> target overrides the <code>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</code> build setting defined in `Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig’. This can lead to problems with the CocoaPods installation</h2><pre><code>- Use the `$(inherited)` flag, or
+- Remove the build settings from the target.</code></pre><h2 id="Found-multiple-specifications-for-Mantle-1-5-6-Users-bkdevops-cocoapods-repos-master-Specs-5-d-c-Mantle-1-5-6-Mantle-podspec-json-Users-bkdevops-cocoapods-repos-trunk-Specs-5-d-c-Mantle-1-5-6-Mantle-podspec-json"><a href="#Found-multiple-specifications-for-Mantle-1-5-6-Users-bkdevops-cocoapods-repos-master-Specs-5-d-c-Mantle-1-5-6-Mantle-podspec-json-Users-bkdevops-cocoapods-repos-trunk-Specs-5-d-c-Mantle-1-5-6-Mantle-podspec-json" class="headerlink" title="[!] Found multiple specifications for Mantle (1.5.6):- /Users/bkdevops/.cocoapods/repos/master/Specs/5/d/c/Mantle/1.5.6/Mantle.podspec.json- /Users/bkdevops/.cocoapods/repos/trunk/Specs/5/d/c/Mantle/1.5.6/Mantle.podspec.json"></a>[!] Found multiple specifications for <code>Mantle (1.5.6)</code>:- /Users/bkdevops/.cocoapods/repos/master/Specs/5/d/c/Mantle/1.5.6/Mantle.podspec.json- /Users/bkdevops/.cocoapods/repos/trunk/Specs/5/d/c/Mantle/1.5.6/Mantle.podspec.json</h2><ul>
+<li><p>原因：<br>  源冲突，~/.cocoapods/repos 文件夹下有两个源, 一个叫trunk，一个叫master，这俩源中都有相同的pod库，pod install命令不知道要引用哪个，一般不影响使用，但会提示警告，影响观感。</p>
+</li>
+<li><p>解决:<br>  trunk or master 删掉一个，哪个都行。</p>
+</li>
+</ul>
+<h2 id="The-Runner-Profile-target-overrides-the-ALWAYS-EMBED-SWIFT-STANDARD-LIBRARIES-build-setting-defined-in-Pods-Target-Support-Files-Pods-Runner-Pods-Runner-profile-xcconfig’-This-can-lead-to-problems-with-the-CocoaPods-installation"><a href="#The-Runner-Profile-target-overrides-the-ALWAYS-EMBED-SWIFT-STANDARD-LIBRARIES-build-setting-defined-in-Pods-Target-Support-Files-Pods-Runner-Pods-Runner-profile-xcconfig’-This-can-lead-to-problems-with-the-CocoaPods-installation" class="headerlink" title="[!] The Runner [Profile] target overrides the ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES build setting defined in `Pods/Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig’. This can lead to problems with the CocoaPods installation"></a>[!] The <code>Runner [Profile]</code> target overrides the <code>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</code> build setting defined in `Pods/Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig’. This can lead to problems with the CocoaPods installation</h2>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/06/12/%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AF%B9UIWebview%E7%9A%84%E5%BC%95%E7%94%A8%20(ITMS-90809)/" class="link f-fl">⟵如何检测项目中对UIWebview的引用 (ITMS-90809)</a>
+    
+    
+      <a href="/2020/06/09/%E8%93%9D%E7%9B%BE%E6%89%93%E5%8C%85%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" class="link f-fr">蓝盾打包问题梳理⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
