@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="使用Tulsi导出XCode工程这步比较简单，按照官网即可，https:&#x2F;&#x2F;google.github.io&#x2F;mediapipe&#x2F;getting_started&#x2F;building_examples.html#ios 如何设置证书在真机上运行 STEP 1  删除XCode编译产物，保证工程干净 XCode菜单 Product -&gt; Clean  STEP 2  删除bazel编译产物，同样保">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048448781636.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048463886571.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048448781636.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048463886571.jpg">
 <meta property="article:published_time" content="2020-11-08T14:44:51.000Z">
-<meta property="article:modified_time" content="2020-11-08T14:48:54.703Z">
+<meta property="article:modified_time" content="2020-11-08T15:13:27.572Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048448781636.jpg">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048448781636.jpg">
   
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
   <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
@@ -111,7 +111,7 @@
 <p>在mediapipe项目文件夹中执行：</p>
 <pre><code>python3 mediapipe/examples/ios/link_local_profiles.py</code></pre><p>这条命令有两个功能，先说第一个功能：</p>
 <ol>
-<li>生成bundleID前缀<br> 生成的前缀会写到mediapipe/examples/ios/bundle_id.bzl中，长这个样子：<br><img src="media/16037660886171/16048448781636.jpg" alt="-w636"><br>嫌它丑，也可以改成自己习惯用的，比如我就改成了”justinsong.Demo”,这个前缀只生成一次，后面不会重复生成。</li>
+<li>生成bundleID前缀<br> 生成的前缀会写到mediapipe/examples/ios/bundle_id.bzl中，长这个样子：<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048448781636.jpg" alt="-w636"><br>嫌它丑，也可以改成自己习惯用的，比如我就改成了”justinsong.Demo”,这个前缀只生成一次，后面不会重复生成。</li>
 </ol>
 <ul>
 <li>STEP 5<br>  上一步第一次执行link_local_profiles.py脚本之后，生成了bundleID前缀，这时我们需要打开工程，为我们想要运行的例子修改bundleID，修改成 bundleID前缀+例子名的格式，修改后回车。</li>
@@ -132,7 +132,7 @@
 * 如果你已经有mobileprovision，直接复制到mediapile/midiapile/路径下，你可能有的这个文件在~/Library/MobileDevice/Provisioning\ Profiles/路径下面，拷一个没过期的过来，改个名字就行了
 
 * 如果你没有这个东西，那就要按照苹果官方指引生成下载再拷贝改名了</code></pre></blockquote>
-<p>执行成功后，你的文件夹中会多一个mobileprovision的替身文件，且能看到原身的信息（如果看不到替身或点击替身找不到原身，回到STEP4重新做。）这时距离成功就差一步了 ：）<br><img src="media/16037660886171/16048463886571.jpg" alt="-w761"></p>
+<p>执行成功后，你的文件夹中会多一个mobileprovision的替身文件，且能看到原身的信息（如果看不到替身或点击替身找不到原身，回到STEP4重新做。）这时距离成功就差一步了 ：）<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048463886571.jpg" alt="-w761"></p>
 <ul>
 <li>STEP 7<br>  回到XCode工程中，选择想要运行的target，运行！</li>
 </ul>
