@@ -3,6 +3,7 @@ title: MediaPipe iOS真机运行指引
 date: 2020-11-08 22:44:51
 tags:
 ---
+
 ### 使用Tulsi导出XCode工程
 
 这步比较简单，按照官网即可，https://google.github.io/mediapipe/getting_started/building_examples.html#ios
@@ -41,7 +42,7 @@ python3 mediapipe/examples/ios/link_local_profiles.py
 
 1. 生成bundleID前缀
     生成的前缀会写到mediapipe/examples/ios/bundle_id.bzl中，长这个样子：
-![-w636](media/16037660886171/16048448781636.jpg)
+![-w636](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048448781636.jpg)
 嫌它丑，也可以改成自己习惯用的，比如我就改成了"justinsong.Demo",这个前缀只生成一次，后面不会重复生成。
 
 * STEP 5
@@ -70,7 +71,7 @@ python3 mediapipe/examples/ios/link_local_profiles.py
 >     * 如果你没有这个东西，那就要按照苹果官方指引生成下载再拷贝改名了
 
 执行成功后，你的文件夹中会多一个mobileprovision的替身文件，且能看到原身的信息（如果看不到替身或点击替身找不到原身，回到STEP4重新做。）这时距离成功就差一步了 ：）
-![-w761](media/16037660886171/16048463886571.jpg)
+![-w761](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2020/11/08/16048463886571.jpg)
 
 * STEP 7
     回到XCode工程中，选择想要运行的target，运行！
