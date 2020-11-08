@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MediaPipe iOS真机运行指引 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Tulsi导出XCode工程这步比较简单，按照官网即可，https:&#x2F;&#x2F;google.github.io&#x2F;mediapipe&#x2F;getting_started&#x2F;building_examples.html#ios 如何设置证书在真机上运行 STEP 1  删除XCode编译产物，保证工程干净 XCode菜单 Product -&gt; Clean  STEP 2  删除bazel编译产物，同样保">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MediaPipe iOS真机运行指引">
+<meta property="og:url" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用Tulsi导出XCode工程这步比较简单，按照官网即可，https:&#x2F;&#x2F;google.github.io&#x2F;mediapipe&#x2F;getting_started&#x2F;building_examples.html#ios 如何设置证书在真机上运行 STEP 1  删除XCode编译产物，保证工程干净 XCode菜单 Product -&gt; Clean  STEP 2  删除bazel编译产物，同样保">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048448781636.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048463886571.jpg">
+<meta property="article:published_time" content="2020-11-08T14:44:51.000Z">
+<meta property="article:modified_time" content="2020-11-08T14:48:54.703Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/media/16037660886171/16048448781636.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">MediaPipe iOS真机运行指引</h2>
+  <p class="sub">Nov 8, 2020</p>
+  <article class="content">
+    <h3 id="使用Tulsi导出XCode工程"><a href="#使用Tulsi导出XCode工程" class="headerlink" title="使用Tulsi导出XCode工程"></a>使用Tulsi导出XCode工程</h3><p>这步比较简单，按照官网即可，<a href="https://google.github.io/mediapipe/getting_started/building_examples.html#ios" target="_blank" rel="noopener">https://google.github.io/mediapipe/getting_started/building_examples.html#ios</a></p>
+<h3 id="如何设置证书在真机上运行"><a href="#如何设置证书在真机上运行" class="headerlink" title="如何设置证书在真机上运行"></a>如何设置证书在真机上运行</h3><ul>
+<li>STEP 1</li>
+</ul>
+<p>删除XCode编译产物，保证工程干净 XCode菜单 Product -&gt; Clean</p>
+<ul>
+<li>STEP 2</li>
+</ul>
+<p>删除bazel编译产物，同样保证工程干净，在mediapipe文件夹中执行：</p>
+<pre><code>bazel clean --expunge</code></pre><ul>
+<li>STEP 3</li>
+</ul>
+<p>使用控制台下载编译时需要下载的文件，测试网络是否通畅，随便找个临时文件夹就好，在控制台中打开文件夹，然后执行：</p>
+<pre><code>https://github.com/bazelbuild/rules_cc/archive/master.zip</code></pre><p>这个文件不需要翻墙就能下载，如果下载失败，请检查自己的网络设置，把代理该干掉的干掉。</p>
+<ul>
+<li>STEP 4</li>
+</ul>
+<p>在mediapipe项目文件夹中执行：</p>
+<pre><code>python3 mediapipe/examples/ios/link_local_profiles.py</code></pre><p>这条命令有两个功能，先说第一个功能：</p>
+<ol>
+<li>生成bundleID前缀<br> 生成的前缀会写到mediapipe/examples/ios/bundle_id.bzl中，长这个样子：<br><img src="media/16037660886171/16048448781636.jpg" alt="-w636"><br>嫌它丑，也可以改成自己习惯用的，比如我就改成了”justinsong.Demo”,这个前缀只生成一次，后面不会重复生成。</li>
+</ol>
+<ul>
+<li>STEP 5<br>  上一步第一次执行link_local_profiles.py脚本之后，生成了bundleID前缀，这时我们需要打开工程，为我们想要运行的例子修改bundleID，修改成 bundleID前缀+例子名的格式，修改后回车。</li>
+</ul>
+<blockquote>
+<pre><code>例如：比如前缀是09a8dab3-7aa0-419e-9e6f-2fa48b7495f8.mediapipe.examples，要运行的例子是FaceDetectionCpu，那么你target的bundleID就要写成&quot;09a8dab3-7aa0-419e-9e6f-2fa48b7495f8.mediapipe.examples.FaceDetectionCpu&quot;
+![-w506](media/16037660886171/16048457811108.jpg)</code></pre></blockquote>
+<ul>
+<li>STEP 6</li>
+</ul>
+<p>在mediapipe项目文件夹中再次执行：</p>
+<pre><code>python3 mediapipe/examples/ios/link_local_profiles.py</code></pre><p>用到这个脚本的第二个功能：</p>
+<ol>
+<li>创建mobileprovision替身，放到各个example的文件夹中去<br> 这一步会根据bundle_id.bzl中的bundleID前缀匹配example文件夹中各个target的bundelID，如果前缀相同，脚本就在这个例子的文件夹中创建一个mobileprovision的替身。</li>
+</ol>
+<blockquote>
+<pre><code>注意！ 这一步想生效有个前提，是你的profile要在mediapipe/provisioning_profile.mobileprovision这个位置，否则失败，如果你的这个路径下没有mobileprovision，解决办法如下：
+* 如果你已经有mobileprovision，直接复制到mediapile/midiapile/路径下，你可能有的这个文件在~/Library/MobileDevice/Provisioning\ Profiles/路径下面，拷一个没过期的过来，改个名字就行了
+
+* 如果你没有这个东西，那就要按照苹果官方指引生成下载再拷贝改名了</code></pre></blockquote>
+<p>执行成功后，你的文件夹中会多一个mobileprovision的替身文件，且能看到原身的信息（如果看不到替身或点击替身找不到原身，回到STEP4重新做。）这时距离成功就差一步了 ：）<br><img src="media/16037660886171/16048463886571.jpg" alt="-w761"></p>
+<ul>
+<li>STEP 7<br>  回到XCode工程中，选择想要运行的target，运行！</li>
+</ul>
+<p>（结束）</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2020/09/22/%E4%BB%8E%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E4%BA%86%E8%A7%A3Xcode%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E6%9E%B6%E6%9E%84-armv7-armv7s-arm64-i386-x86-64/" class="link f-fr">从编译失败了解Xcode中的各种架构 armv7,armv7s,arm64,i386,x86_64⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
