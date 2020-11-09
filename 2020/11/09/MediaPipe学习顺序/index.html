@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MediaPipe学习顺序 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="刚刚接触MediaPipe，之前没有接触过机器学习相关的东西，上手MediaPipe发现周边知识缺了很多，趟过一遍之后，梳理了下比较合理的学习顺序  STEP 1 bazel使用流程https:&#x2F;&#x2F;docs.bazel.build&#x2F;versions&#x2F;master&#x2F;tutorial&#x2F;ios-app.html STEP 2 MediaPipe Demo运行https:&#x2F;&#x2F;google.github.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MediaPipe学习顺序">
+<meta property="og:url" content="http://yoursite.com/2020/11/09/MediaPipe%E5%AD%A6%E4%B9%A0%E9%A1%BA%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="刚刚接触MediaPipe，之前没有接触过机器学习相关的东西，上手MediaPipe发现周边知识缺了很多，趟过一遍之后，梳理了下比较合理的学习顺序  STEP 1 bazel使用流程https:&#x2F;&#x2F;docs.bazel.build&#x2F;versions&#x2F;master&#x2F;tutorial&#x2F;ios-app.html STEP 2 MediaPipe Demo运行https:&#x2F;&#x2F;google.github.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-09T06:45:06.000Z">
+<meta property="article:modified_time" content="2020-11-09T06:45:41.039Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">MediaPipe学习顺序</h2>
+  <p class="sub">Nov 9, 2020</p>
+  <article class="content">
+    <blockquote>
+<p>刚刚接触MediaPipe，之前没有接触过机器学习相关的东西，上手MediaPipe发现周边知识缺了很多，趟过一遍之后，梳理了下比较合理的学习顺序</p>
+</blockquote>
+<h3 id="STEP-1-bazel使用流程"><a href="#STEP-1-bazel使用流程" class="headerlink" title="STEP 1 bazel使用流程"></a>STEP 1 bazel使用流程</h3><p><a href="https://docs.bazel.build/versions/master/tutorial/ios-app.html" target="_blank" rel="noopener">https://docs.bazel.build/versions/master/tutorial/ios-app.html</a></p>
+<h3 id="STEP-2-MediaPipe-Demo运行"><a href="#STEP-2-MediaPipe-Demo运行" class="headerlink" title="STEP 2 MediaPipe Demo运行"></a>STEP 2 MediaPipe Demo运行</h3><p><a href="https://google.github.io/mediapipe/getting_started/building_examples.html" target="_blank" rel="noopener">https://google.github.io/mediapipe/getting_started/building_examples.html</a></p>
+<h3 id="STEP-3-自制MediaPipe-HelloWorld程序"><a href="#STEP-3-自制MediaPipe-HelloWorld程序" class="headerlink" title="STEP 3 自制MediaPipe HelloWorld程序"></a>STEP 3 自制MediaPipe HelloWorld程序</h3><p><a href="https://google.github.io/mediapipe/getting_started/hello_world_ios.html" target="_blank" rel="noopener">https://google.github.io/mediapipe/getting_started/hello_world_ios.html</a></p>
+<h3 id="STEP-4-MeidaPipe-工程化"><a href="#STEP-4-MeidaPipe-工程化" class="headerlink" title="STEP 4 MeidaPipe 工程化"></a>STEP 4 MeidaPipe 工程化</h3><p>尝试将MediaPipe的编译成framework，方便引用，没有教程，自己探索</p>
+<h3 id="STEP-5-阅读MediaPipe-了解实现"><a href="#STEP-5-阅读MediaPipe-了解实现" class="headerlink" title="STEP 5 阅读MediaPipe 了解实现"></a>STEP 5 阅读MediaPipe 了解实现</h3><h3 id="STEP-6-自定义MediaPipe的图和算子"><a href="#STEP-6-自定义MediaPipe的图和算子" class="headerlink" title="STEP 6 自定义MediaPipe的图和算子"></a>STEP 6 自定义MediaPipe的图和算子</h3>
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2020/11/08/MediaPipe-iOS%E7%9C%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E6%8C%87%E5%BC%95/" class="link f-fr">MediaPipe iOS真机运行指引⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
