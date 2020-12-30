@@ -13,7 +13,7 @@
 <meta property="og:description" content="本地所有修改的。没有的提交的，都返回到原来的状态git checkout .把所有没有提交的修改暂存到stash里面。可用git stash pop回复git stash撤销修改 &amp;&amp; 删掉新增文件git checkout . &amp;&amp; git clean -xdf执行完commit后，想撤回commitgit reset --soft HEAD^从当前分支拉出新分支在">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-22T06:30:07.000Z">
-<meta property="article:modified_time" content="2020-06-22T15:24:09.303Z">
+<meta property="article:modified_time" content="2020-12-30T03:20:31.164Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -90,7 +90,7 @@
   <article class="content">
     <h3 id="本地所有修改的。没有的提交的，都返回到原来的状态"><a href="#本地所有修改的。没有的提交的，都返回到原来的状态" class="headerlink" title="本地所有修改的。没有的提交的，都返回到原来的状态"></a>本地所有修改的。没有的提交的，都返回到原来的状态</h3><pre><code>git checkout .</code></pre><h3 id="把所有没有提交的修改暂存到stash里面。可用git-stash-pop回复"><a href="#把所有没有提交的修改暂存到stash里面。可用git-stash-pop回复" class="headerlink" title="把所有没有提交的修改暂存到stash里面。可用git stash pop回复"></a>把所有没有提交的修改暂存到stash里面。可用git stash pop回复</h3><pre><code>git stash</code></pre><h3 id="撤销修改-amp-amp-删掉新增文件"><a href="#撤销修改-amp-amp-删掉新增文件" class="headerlink" title="撤销修改 &amp;&amp; 删掉新增文件"></a>撤销修改 &amp;&amp; 删掉新增文件</h3><pre><code>git checkout . &amp;&amp; git clean -xdf</code></pre><h3 id="执行完commit后，想撤回commit"><a href="#执行完commit后，想撤回commit" class="headerlink" title="执行完commit后，想撤回commit"></a>执行完commit后，想撤回commit</h3><pre><code>git reset --soft HEAD^</code></pre><h3 id="从当前分支拉出新分支"><a href="#从当前分支拉出新分支" class="headerlink" title="从当前分支拉出新分支"></a>从当前分支拉出新分支</h3><p>在protect分支修改完代码不能直接提交，需要通过mr合入，直接从protect分支拉出新分支，把代码提交到新分支上。</p>
 <pre><code>git checkout -b newBranchName</code></pre><p>拉完第一次push的时候要关联upstream</p>
-<pre><code>git push --set-upstream origin bugfix/test1</code></pre><h3 id="查看远程有哪些分支"><a href="#查看远程有哪些分支" class="headerlink" title="查看远程有哪些分支"></a>查看远程有哪些分支</h3><pre><code>git branch -a</code></pre><h3 id="撤销merge"><a href="#撤销merge" class="headerlink" title="撤销merge"></a>撤销merge</h3><pre><code>git reset --hard 最后一次push的commitID</code></pre>
+<pre><code>git push --set-upstream origin bugfix/test1</code></pre><h3 id="查看远程有哪些分支"><a href="#查看远程有哪些分支" class="headerlink" title="查看远程有哪些分支"></a>查看远程有哪些分支</h3><pre><code>git branch -a</code></pre><h3 id="撤销merge"><a href="#撤销merge" class="headerlink" title="撤销merge"></a>撤销merge</h3><pre><code>git reset --hard 最后一次push的commitID</code></pre><h3 id="查看项目远程地址"><a href="#查看项目远程地址" class="headerlink" title="查看项目远程地址"></a>查看项目远程地址</h3><pre><code>git remote -v</code></pre><h3 id="修改远程地址"><a href="#修改远程地址" class="headerlink" title="修改远程地址"></a>修改远程地址</h3><pre><code>git remote set-url origin git@gl.zego.im:MachineVision/KiwiEngine.git</code></pre><h3 id="查看远程项目所有分支"><a href="#查看远程项目所有分支" class="headerlink" title="查看远程项目所有分支"></a>查看远程项目所有分支</h3><pre><code>git branch -a</code></pre><h3 id="查看当前仓库基本信息"><a href="#查看当前仓库基本信息" class="headerlink" title="查看当前仓库基本信息"></a>查看当前仓库基本信息</h3><pre><code>git remote show origin</code></pre>
   </article>
   <footer class="f-cf">
     
