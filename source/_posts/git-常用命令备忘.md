@@ -56,3 +56,27 @@ git branch -a
 ```
 git reset --hard 最后一次push的commitID
 ```
+
+### 查看项目远程地址
+
+```
+git remote -v
+```
+
+### 修改远程地址
+
+```
+git remote set-url origin git@gl.zego.im:MachineVision/KiwiEngine.git
+```
+
+### 查看远程项目所有分支
+
+```
+git branch -a
+```
+
+### 查看当前仓库基本信息
+
+```
+git remote show origin
+```
