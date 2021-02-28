@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iphone机型架构 &amp;&amp; 对OpenGLES版本的支持情况 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="架构机型对照armv7：iPhone4｜iPhone4S｜iPad｜iPad2｜iPad3(The New iPad)｜iPad mini｜iPod Touch 3G｜iPod Touch4 armv7s：iPhone5｜iPhone5C｜iPad4(iPad with Retina Display) arm64： iphone8 | iphone8 plus | iphoneX | iphone">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iphone机型架构 &amp;&amp; 对OpenGLES版本的支持情况">
+<meta property="og:url" content="http://yoursite.com/2021/02/28/iphone%E6%9C%BA%E5%9E%8B%E6%9E%B6%E6%9E%84-%E5%AF%B9OpenGLES%E7%89%88%E6%9C%AC%E7%9A%84%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="架构机型对照armv7：iPhone4｜iPhone4S｜iPad｜iPad2｜iPad3(The New iPad)｜iPad mini｜iPod Touch 3G｜iPod Touch4 armv7s：iPhone5｜iPhone5C｜iPad4(iPad with Retina Display) arm64： iphone8 | iphone8 plus | iphoneX | iphone">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-28T10:04:08.000Z">
+<meta property="article:modified_time" content="2021-02-28T10:04:36.427Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">iphone机型架构 &amp;&amp; 对OpenGLES版本的支持情况</h2>
+  <p class="sub">Feb 28, 2021</p>
+  <article class="content">
+    <h2 id="架构机型对照"><a href="#架构机型对照" class="headerlink" title="架构机型对照"></a>架构机型对照</h2><p><strong>armv7</strong>：iPhone4｜iPhone4S｜iPad｜iPad2｜iPad3(The New iPad)｜iPad mini｜iPod Touch 3G｜iPod Touch4</p>
+<p><strong>armv7s</strong>：iPhone5｜iPhone5C｜iPad4(iPad with Retina Display)</p>
+<p><strong>arm64</strong>： iphone8 | iphone8 plus | iphoneX | iphone7 | iphone7 plus | iPhone6s | iphone6s plus｜iPhone6｜ iPhone6 plus｜iPhone5S</p>
+<p><strong>arm64e</strong>：iPhone XS | iPhone XS Max | iPhone XR | iPhone 11 | iPhone 11 Pro | iphone 11 Pro Max</p>
+<p><strong>i386</strong>是针对intel通用微处理器32位处理器</p>
+<p><strong>x86_64</strong>是针对x86架构的64位处理器</p>
+<h2 id="OpenGLES支持情况"><a href="#OpenGLES支持情况" class="headerlink" title="OpenGLES支持情况"></a>OpenGLES支持情况</h2><ol>
+<li><p><strong>IOS从IOS7以上版本开始支持ES 3.0</strong></p>
+</li>
+<li><p><strong>iphone 5及以下的机器只支持OpenGL2，不支持OpenGL3（包括iphone5c）</strong></p>
+</li>
+<li><p><strong>iphone 5s及以上的机器开始支持OpenGL3.0</strong></p>
+</li>
+</ol>
+<p>参考文档：<a href="https://www.cnblogs.com/singmelody/p/3774638.html" target="_blank" rel="noopener">https://www.cnblogs.com/singmelody/p/3774638.html</a><br><a href="https://zhidao.baidu.com/question/1833302402268128980.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/1833302402268128980.html</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2020/12/31/NSString%E7%B1%BB%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" class="link f-fr">NSString类文件夹路径的处理方法⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
