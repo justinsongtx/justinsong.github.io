@@ -1,5 +1,5 @@
 ---
-title: iphone机型架构 && 对OpenGLES版本的支持情况
+title: iphone机型架构 & 对OpenGLES版本的支持情况
 date: 2021-02-28 18:04:08
 tags:
 ---
