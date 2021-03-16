@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CVPixelBufferRef 常用函数 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常用函数加锁解锁CVPixelBufferLockBaseAddress(pixelBuffer, 0); CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);引用释放CFRetain(pixelBuffer); CFRelease(pixelBuffer);获取通颜色道个数int planeCount &#x3D; CVPixelBufferGetPlaneCou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVPixelBufferRef 常用函数">
+<meta property="og:url" content="http://yoursite.com/2021/03/16/CVPixelBufferRef-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="常用函数加锁解锁CVPixelBufferLockBaseAddress(pixelBuffer, 0); CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);引用释放CFRetain(pixelBuffer); CFRelease(pixelBuffer);获取通颜色道个数int planeCount &#x3D; CVPixelBufferGetPlaneCou">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-16T07:07:49.000Z">
+<meta property="article:modified_time" content="2021-03-16T07:08:13.885Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">CVPixelBufferRef 常用函数</h2>
+  <p class="sub">Mar 16, 2021</p>
+  <article class="content">
+    <h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="加锁解锁"><a href="#加锁解锁" class="headerlink" title="加锁解锁"></a>加锁解锁</h2><pre><code>CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);</code></pre><h2 id="引用释放"><a href="#引用释放" class="headerlink" title="引用释放"></a>引用释放</h2><pre><code>CFRetain(pixelBuffer);
+CFRelease(pixelBuffer);</code></pre><h2 id="获取通颜色道个数"><a href="#获取通颜色道个数" class="headerlink" title="获取通颜色道个数"></a>获取通颜色道个数</h2><pre><code>int planeCount = CVPixelBufferGetPlaneCount(pixelBuffer);</code></pre><h2 id="获取颜色空间种类"><a href="#获取颜色空间种类" class="headerlink" title="获取颜色空间种类"></a>获取颜色空间种类</h2><pre><code>/**基本只有kCVPixelFormatType_32BGRA和kCVPixelFormatType_32ABGR*/
+OSType type = CVPixelBufferGetPixelFormatType(pixelBuffer);</code></pre><h2 id="获取宽高"><a href="#获取宽高" class="headerlink" title="获取宽高"></a>获取宽高</h2><pre><code>int width = (int)CVPixelBufferGetWidth(pixelBuffer);
+int height = (int)CVPixelBufferGetHeight(pixelBuffer);</code></pre><h2 id="获取buffer数据地址"><a href="#获取buffer数据地址" class="headerlink" title="获取buffer数据地址"></a>获取buffer数据地址</h2><pre><code>unsigned char* srcBuffer = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));</code></pre><h2 id="获取数据长度"><a href="#获取数据长度" class="headerlink" title="获取数据长度"></a>获取数据长度</h2><pre><code>/** 这个接口获取的是完整的pixelbuffer数据长度，其中包含对齐像素的长度，有可能会比width * height * channel的结果大，多出来的就是对齐像素所占的字节数*/
+int srcLen = CVPixelBufferGetDataSize(pixelBuffer);</code></pre><h2 id="获取单行所占字节数"><a href="#获取单行所占字节数" class="headerlink" title="获取单行所占字节数"></a>获取单行所占字节数</h2><pre><code>    CVPixelBufferLockBaseAddress(bgraPB, 0);
+
+    int bufferWidth = (int)CVPixelBufferGetWidth( bgraPB );
+    int bufferHeight = (int)CVPixelBufferGetHeight( bgraPB );
+
+    /**单行所占字节数，其中包含对齐像素的大小*/
+    size_t srcRowBytes = CVPixelBufferGetBytesPerRow( bgraPB );
+    /**每个像素所占的字节数*/
+    long srcPixelBytes = srcRowBytes / bufferWidth;
+    /**整个buffer所占字节数，其中包含对齐像素的大小*/
+    long srcLen = CVPixelBufferGetDataSize(bgraPB);
+
+    CVPixelBufferUnlockBaseAddress( bgraPB, 0 );</code></pre><h2 id="创建CVPixelBufferRef"><a href="#创建CVPixelBufferRef" class="headerlink" title="创建CVPixelBufferRef"></a>创建CVPixelBufferRef</h2><pre><code>/**Core Video并不支持RGBA格式，常用的支持有BGRA和ARGB，其他支持的格式查阅：https://developer.apple.com/library/archive/qa/qa1501/_index.html*/
++ (CVPixelBufferRef)createPixelBuffer:(size_t)width height:(size_t)height formatType:(OSType)formatType
+{
+    CVPixelBufferRef pixel_buffer;
+    CFDictionaryRef empty; // empty value for attr value.
+    CFMutableDictionaryRef attrs;
+
+    // our empty IOSurface properties dictionary
+    empty = CFDictionaryCreate(kCFAllocatorDefault
+                               , NULL
+                               , NULL
+                               , 0
+                               , &amp;kCFTypeDictionaryKeyCallBacks
+                               , &amp;kCFTypeDictionaryValueCallBacks);
+    attrs = CFDictionaryCreateMutable(kCFAllocatorDefault
+                                      , 1
+                                      , &amp;kCFTypeDictionaryKeyCallBacks
+                                      , &amp;kCFTypeDictionaryValueCallBacks);
+    CFDictionarySetValue(attrs, kCVPixelBufferIOSurfacePropertiesKey, empty);
+
+    CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, width, height, formatType, attrs, &amp;pixel_buffer);
+    if (err) {
+        NSLog(@&quot;failed&quot;);
+    }
+    CFRelease(attrs);
+    CFRelease(empty);
+
+    return pixel_buffer;
+}</code></pre><h2 id="CVPixelBufferRef转NSImage"><a href="#CVPixelBufferRef转NSImage" class="headerlink" title="CVPixelBufferRef转NSImage"></a>CVPixelBufferRef转NSImage</h2><pre><code>/** pixelBuffer 转 NSImage*/
++ (NSImage *)imageFromPixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    CIContext *temporaryContext = [CIContext contextWithOptions:nil];
+
+    CGRect frame = CGRectMake(0, 0, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
+    CGImageRef videoImage = [temporaryContext createCGImage:ciImage fromRect:frame];
+
+    NSImage *image = [[NSImage alloc] initWithCGImage:videoImage size:NSZeroSize];
+    CGImageRelease(videoImage);
+
+    return image;
+}</code></pre><h1 id="坑点"><a href="#坑点" class="headerlink" title="坑点"></a>坑点</h1><ul>
+<li><p>背景</p>
+<p>  MacOS下CVPixelBuffer直接转纹理转成的纹理target是GL_TEXTURE_RECTANGLE，需要再转换成通用的GL_TEXTURE_2D纹理。于是想到把buffer取出来自己上传。</p>
+</li>
+<li><p>现象</p>
+<p>  CVPixelBufferRef取出buffer上传纹理之后，结果出现扭曲，逐行查找发现是<code>CVPixelBufferGetBytesPerRow</code>返回的数据多了4，这个API应该返回一行像素点所占用的字节数，比如一个4通道，宽高为240*450的图片，一行的字节数应该是4 * 240 = 960, 而实际情况是<code>CVPixelBufferGetBytesPerRow</code>返回了964，比宽度多了4个字节，也就是多了一个像素。</p>
+</li>
+<li><p>原因</p>
+<p>  一番搜索后，发现<code>CVPixelBufferGetBytesPerRow</code>返回的是屏幕真实显示的像素个数，有时会有对齐像素，导致获取的字节数不准确，可以知道这个api 与 width * channel是不等效的，不要用这个api来组装vImage_Buffer，mac和ios设备都会有这种对其像素。</p>
+</li>
+<li><p>解决</p>
+<p>  我的解决办法是用计算出对齐像素的个数，逐行memcpy排除掉这些像素，然后在转NSImage或上传纹理。 如果有更好的方法请留言~</p>
+</li>
+</ul>
+<p>一行代码胜千言，下面是我的CVPixelBuffer剔除对齐像素的代码：</p>
+<pre><code>
++ (NSData *)rgbaBufferFromBGRAPixel:(CVPixelBufferRef)bgraPB {
+
+    CVPixelBufferLockBaseAddress(bgraPB, 0);
+
+    int bufferWidth = (int)CVPixelBufferGetWidth( bgraPB );
+    int bufferHeight = (int)CVPixelBufferGetHeight( bgraPB );
+
+    /**源*/
+    size_t srcRowBytes = CVPixelBufferGetBytesPerRow( bgraPB );
+    long srcPixelBytes = srcRowBytes / bufferWidth;
+    long srcLen = CVPixelBufferGetDataSize(bgraPB);
+    uint8_t *srcBuffer = (uint8_t *)CVPixelBufferGetBaseAddress( bgraPB );
+
+    /**目标*/
+    long destPixelBytes = 4;
+    size_t destRowBytes = bufferWidth * destPixelBytes;
+    long destLen = destRowBytes * bufferHeight;
+    uint8_t *destBuffer = (uint8_t *)malloc(destLen);
+
+    /**逐行拷贝, 跳过无用的对齐像素，否则图像会扭曲*/
+    for ( int row = 0; row &lt; bufferHeight; row++ )
+    {
+        uint8_t *srcAddress = srcBuffer + (row * srcRowBytes);
+        uint8_t *destAddress = destBuffer + (row * destRowBytes);
+        memcpy(destAddress, srcAddress, destRowBytes);
+    }
+
+    CVPixelBufferUnlockBaseAddress( bgraPB, 0 );
+
+    NSData *rgbaData = [[NSData alloc] initWithBytes:destBuffer length:destLen];
+    free(destBuffer);
+
+    return rgbaData;
+}</code></pre><p>记一篇Stack Overflow：<br><a href="https://stackoverflow.com/questions/44179891/avplayeritemvideooutput-copypixelbufferforitemtime-gives-incorrect-cvpixelbuffer/44211003#44211003" target="_blank" rel="noopener">https://stackoverflow.com/questions/44179891/avplayeritemvideooutput-copypixelbufferforitemtime-gives-incorrect-cvpixelbuffer/44211003#44211003</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2021/03/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%9F%E6%88%90%E7%BD%91%E7%AB%99/" class="link f-fr">正则表达式生成网站⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
