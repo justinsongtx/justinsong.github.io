@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>luajit iOS打包笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="luajit iOS打包笔记查看文档在doc&#x2F;intall.html中提示，有关于iOS打包的指引： 使用这个作为打包命令，打包出产物后，产物不支持bitcode。 添加bitcode支持转而在工程中搜索bitcode关键字，企图找到bitcode的开关，结果没有。又在转而想要自己添加bitcode的编译选项，参考文档.文档中提示想要支持bitcode，需要在CFlags中添加-fembed-bi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="luajit iOS打包笔记">
+<meta property="og:url" content="http://yoursite.com/2021/05/13/luajit-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="luajit iOS打包笔记查看文档在doc&#x2F;intall.html中提示，有关于iOS打包的指引： 使用这个作为打包命令，打包出产物后，产物不支持bitcode。 添加bitcode支持转而在工程中搜索bitcode关键字，企图找到bitcode的开关，结果没有。又在转而想要自己添加bitcode的编译选项，参考文档.文档中提示想要支持bitcode，需要在CFlags中添加-fembed-bi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208916328164.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208924923660.jpg">
+<meta property="article:published_time" content="2021-05-13T07:56:12.000Z">
+<meta property="article:modified_time" content="2021-05-13T07:56:42.613Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208916328164.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">luajit iOS打包笔记</h2>
+  <p class="sub">May 13, 2021</p>
+  <article class="content">
+    <h1 id="luajit-iOS打包笔记"><a href="#luajit-iOS打包笔记" class="headerlink" title="luajit iOS打包笔记"></a>luajit iOS打包笔记</h1><h3 id="查看文档"><a href="#查看文档" class="headerlink" title="查看文档"></a>查看文档</h3><p>在doc/intall.html中提示，有关于iOS打包的指引：<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208916328164.jpg" alt=""></p>
+<p>使用这个作为打包命令，打包出产物后，产物<strong>不支持bitcode</strong>。</p>
+<h3 id="添加bitcode支持"><a href="#添加bitcode支持" class="headerlink" title="添加bitcode支持"></a>添加bitcode支持</h3><p>转而在工程中搜索bitcode关键字，企图找到bitcode的开关，结果没有。又在转而想要自己添加bitcode的编译选项，<a href="https://www.geek-share.com/detail/2789992000.html" target="_blank" rel="noopener">参考文档</a>.文档中提示想要支持bitcode，需要在CFlags中添加<strong>-fembed-bitcode</strong>和<strong>-fembed-bitcode-maker</strong>。</p>
+<p>知道了要添加的选项，接下来就是找到要添加的地方，打开src/MakeFile，在MakeFile中搜索CFLAGS，并没有使用，CFLAGS是系统变量他没用到我直接添加也是生效的,于是增加bitcode选项：<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208924923660.jpg" alt=""></p>
+<p>重新打包，解决！</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2021/05/12/xcodebuild-%E8%B8%A9%E5%9D%91%E5%92%8C%E7%96%91%E6%83%91/" class="link f-fr">xcodebuild 踩坑和疑惑⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
