@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>webp iOS打包笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="修改原有打包脚本原本的打包脚本中已经支持了bitcode，还需要修改的是把framework包装改成.a。 webp工程在根目录下自带了iosbuild.sh打包脚本，表扬！基于iosbuild.sh直接修改就好了，修改这么几处： framework改为.a包装 干掉不用的架构 修改产物后缀 然后执行脚本，拿产物，收工。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webp iOS打包笔记">
+<meta property="og:url" content="http://yoursite.com/2021/05/13/webp-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="修改原有打包脚本原本的打包脚本中已经支持了bitcode，还需要修改的是把framework包装改成.a。 webp工程在根目录下自带了iosbuild.sh打包脚本，表扬！基于iosbuild.sh直接修改就好了，修改这么几处： framework改为.a包装 干掉不用的架构 修改产物后缀 然后执行脚本，拿产物，收工。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961142445.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961375689.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961590645.jpg">
+<meta property="article:published_time" content="2021-05-13T08:50:47.000Z">
+<meta property="article:modified_time" content="2021-05-13T08:57:16.500Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961142445.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">webp iOS打包笔记</h2>
+  <p class="sub">May 13, 2021</p>
+  <article class="content">
+    <h3 id="修改原有打包脚本"><a href="#修改原有打包脚本" class="headerlink" title="修改原有打包脚本"></a>修改原有打包脚本</h3><p>原本的打包脚本中已经支持了bitcode，还需要修改的是把framework包装改成.a。</p>
+<p>webp工程在根目录下自带了iosbuild.sh打包脚本，表扬！基于iosbuild.sh直接修改就好了，修改这么几处：</p>
+<h5 id="framework改为-a包装"><a href="#framework改为-a包装" class="headerlink" title="framework改为.a包装"></a>framework改为.a包装</h5><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961142445.jpg" alt=""></p>
+<h5 id="干掉不用的架构"><a href="#干掉不用的架构" class="headerlink" title="干掉不用的架构"></a>干掉不用的架构</h5><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961375689.jpg" alt=""></p>
+<h5 id="修改产物后缀"><a href="#修改产物后缀" class="headerlink" title="修改产物后缀"></a>修改产物后缀</h5><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/13/16208961590645.jpg" alt=""></p>
+<p>然后执行脚本，拿产物，收工。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2021/05/13/Chipmunk2D-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/" class="link f-fr">Chipmunk2D iOS打包笔记⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
