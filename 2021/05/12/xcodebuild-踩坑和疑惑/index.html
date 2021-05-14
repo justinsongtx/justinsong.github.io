@@ -5,17 +5,17 @@
   
   <title>xcodebuild 踩坑和疑惑 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="产物目录问题xcodebuild -targetxcodebuild archive -project ..&#x2F;ios&#x2F;kiwi&#x2F;kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK打包时如果用-target选项，那么产物会打包到当前工程目录的“bui">
+  <meta name="description" content="不同打包选项的产物目录xcodebuild -targetxcodebuild archive -project ..&#x2F;ios&#x2F;kiwi&#x2F;kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK打包时如果用-target选项，那么产物会打包到当前工程目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xcodebuild 踩坑和疑惑">
 <meta property="og:url" content="http://yoursite.com/2021/05/12/xcodebuild-%E8%B8%A9%E5%9D%91%E5%92%8C%E7%96%91%E6%83%91/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="产物目录问题xcodebuild -targetxcodebuild archive -project ..&#x2F;ios&#x2F;kiwi&#x2F;kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK打包时如果用-target选项，那么产物会打包到当前工程目录的“bui">
+<meta property="og:description" content="不同打包选项的产物目录xcodebuild -targetxcodebuild archive -project ..&#x2F;ios&#x2F;kiwi&#x2F;kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK打包时如果用-target选项，那么产物会打包到当前工程目录">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/12/16208027369646.jpg">
 <meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/12/16208034012530.jpg">
 <meta property="article:published_time" content="2021-05-12T06:43:24.000Z">
-<meta property="article:modified_time" content="2021-05-12T07:11:37.081Z">
+<meta property="article:modified_time" content="2021-05-14T07:09:51.162Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/12/16208027369646.jpg">
@@ -91,16 +91,16 @@
   <h2 class="title">xcodebuild 踩坑和疑惑</h2>
   <p class="sub">May 12, 2021</p>
   <article class="content">
-    <h1 id="产物目录问题"><a href="#产物目录问题" class="headerlink" title="产物目录问题"></a>产物目录问题</h1><h3 id="xcodebuild-target"><a href="#xcodebuild-target" class="headerlink" title="xcodebuild -target"></a>xcodebuild -target</h3><pre><code>xcodebuild archive -project ../ios/kiwi/kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK</code></pre><p>打包时如果用<strong>-target</strong>选项，那么产物会打包到当前工程目录的“build/UninstalledProducts/iphoneos/”下面。</p>
-<h3 id="xcodebuild-scheme"><a href="#xcodebuild-scheme" class="headerlink" title="xcodebuild -scheme"></a>xcodebuild -scheme</h3><pre><code>xcodebuild archive -project ../ios/kiwi/kiwi.xcodeproj -scheme kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK</code></pre><p>打包时如果用<strong>-scheme</strong>选项，那么产物会打包到DerivedData文件夹下面，例如:</p>
-<pre><code>/Users/jenkins/Library/Developer/Xcode/DerivedData/kiwi-haukwgjiorhjwxbmduttecrfbfml/Build/Intermediates.noindex/ArchiveIntermediates/kiwi/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/</code></pre><h3 id="修改产物目录的疑问"><a href="#修改产物目录的疑问" class="headerlink" title="修改产物目录的疑问"></a>修改产物目录的疑问</h3><p>修改DerivedData目录后，无论是在project  setting还是xcode setting中修改，用beyondcompare对比修改前后的工程文件，均没有变化。</p>
+    <h1 id="不同打包选项的产物目录"><a href="#不同打包选项的产物目录" class="headerlink" title="不同打包选项的产物目录"></a>不同打包选项的产物目录</h1><h5 id="xcodebuild-target"><a href="#xcodebuild-target" class="headerlink" title="xcodebuild -target"></a>xcodebuild -target</h5><pre><code>xcodebuild archive -project ../ios/kiwi/kiwi.xcodeproj -target kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK</code></pre><p>打包时如果用<strong>-target</strong>选项，那么产物会打包到当前工程目录的“build/UninstalledProducts/iphoneos/”下面。</p>
+<h5 id="xcodebuild-scheme"><a href="#xcodebuild-scheme" class="headerlink" title="xcodebuild -scheme"></a>xcodebuild -scheme</h5><pre><code>xcodebuild archive -project ../ios/kiwi/kiwi.xcodeproj -scheme kiwi -configuration Release -arch &quot;x86_64&quot; -sdk $XCODE_SIMULATOR_SDK</code></pre><p>打包时如果用<strong>-scheme</strong>选项，那么产物会打包到DerivedData文件夹下面，例如:</p>
+<pre><code>/Users/jenkins/Library/Developer/Xcode/DerivedData/kiwi-haukwgjiorhjwxbmduttecrfbfml/Build/Intermediates.noindex/ArchiveIntermediates/kiwi/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/</code></pre><h5 id="修改产物目录的疑问"><a href="#修改产物目录的疑问" class="headerlink" title="修改产物目录的疑问"></a>修改产物目录的疑问</h5><p>修改DerivedData目录后，无论是在project  setting还是xcode setting中修改，用beyondcompare对比修改前后的工程文件，均没有变化。</p>
 <p>这就导致无法提交变更，不能同步给别人，目前还不知道这个修改到底改的哪个文件，很疑惑。</p>
 <h1 id="采坑"><a href="#采坑" class="headerlink" title="采坑"></a>采坑</h1><p>工程结构如下：<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/12/16208027369646.jpg" alt=""></p>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>kiwi和kiwi-cocos是两个静态库，kiwi会依赖的kiwi-cocos。</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>使用xcodebuild -target打包kiwi静态库时，总是提示找不到kiwi-cocos的库，但实际libkiwi-cocos的产物已经打包出来了。</p>
-<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h3><p>过程中尝试了改用<strong>xcodebuild -scheme</strong>打包，可以成功打包，但产物目录在DerivedData路径下：</p>
+<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>kiwi和kiwi-cocos是两个静态库，kiwi会依赖的kiwi-cocos。</p>
+<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><p>使用xcodebuild -target打包kiwi静态库时，总是提示找不到kiwi-cocos的库，但实际libkiwi-cocos的产物已经打包出来了。</p>
+<h5 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h5><p>过程中尝试了改用<strong>xcodebuild -scheme</strong>打包，可以成功打包，但产物目录在DerivedData路径下：</p>
 <pre><code>/Users/jenkins/Library/Developer/Xcode/DerivedData/kiwi-haukwgjiorhjwxbmduttecrfbfml/Build/Intermediates.noindex/ArchiveIntermediates/kiwi/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/</code></pre><p>其中“kiwi-haukwgjiorhjwxbmduttecrfbfml”路径是乱码，没有找到获取这个路径的办法，产物虽然打出来了，但脚本中拼不出产物路径，搜索后发现，网上的静态库打包脚本都是使用<strong>xcodebuild -target</strong>的方式，然指定工程的相对路径，找到产物，于是再次改回<strong>-target</strong>。</p>
-<h3 id="最终解决"><a href="#最终解决" class="headerlink" title="最终解决"></a>最终解决</h3><p>macos的工程依赖和ios的结构相同，mac使用的也是<strong>xcodebuild -target</strong>，却可以打包成功，这让我有点晕。</p>
+<h5 id="最终解决"><a href="#最终解决" class="headerlink" title="最终解决"></a>最终解决</h5><p>macos的工程依赖和ios的结构相同，mac使用的也是<strong>xcodebuild -target</strong>，却可以打包成功，这让我有点晕。</p>
 <p>最后抱着试一试的心态删除重新添加了ios工程中对kiwi-cocos的依赖，妈的解决了！一脸懵逼！<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/05/12/16208034012530.jpg" alt=""></p>
 <p>虽然解决了，但并不清楚原因，推测是依赖的kiwi-cocos产物md5有变化。这个问题暴露了我对工程配置的理解不足，后续要补齐对xcode工程设置和打包过程的短板。</p>
 
