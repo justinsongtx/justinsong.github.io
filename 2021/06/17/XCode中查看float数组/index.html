@@ -3,15 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>XCode中查看float数组 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/categories/page/5/index.html">
+  <meta name="description" content="病情XCode查看float指针时，只能看到第一个元素的值，无法查看后续的值. 治疗在参数查看器中输入以下代码，其中nativeString是float指针的地址，将他强转成结构体查看。 typedef struct {         float a[1600];     } X;     X *x &#x3D; (X*)nativeString; x;疗效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XCode中查看float数组">
+<meta property="og:url" content="http://yoursite.com/2021/06/17/XCode%E4%B8%AD%E6%9F%A5%E7%9C%8Bfloat%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="病情XCode查看float指针时，只能看到第一个元素的值，无法查看后续的值. 治疗在参数查看器中输入以下代码，其中nativeString是float指针的地址，将他强转成结构体查看。 typedef struct {         float a[1600];     } X;     X *x &#x3D; (X*)nativeString; x;疗效">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/17/16239022086217.jpg">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/17/16239026141773.jpg">
+<meta property="article:published_time" content="2021-06-17T03:39:38.000Z">
+<meta property="article:modified_time" content="2021-06-17T04:05:08.981Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/17/16239022086217.jpg">
   
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
   <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
@@ -80,65 +87,22 @@
     </div>
   </div>
 </nav>
-    <div id="main">
-  
-  <section class="archive">
+    <div id="main"><section class="article">
+  <h2 class="title">XCode中查看float数组</h2>
+  <p class="sub">Jun 17, 2021</p>
+  <article class="content">
+    <h1 id="病情"><a href="#病情" class="headerlink" title="病情"></a>病情</h1><p>XCode查看float指针时，只能看到第一个元素的值，无法查看后续的值.<br><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/17/16239022086217.jpg" alt=""></p>
+<h1 id="治疗"><a href="#治疗" class="headerlink" title="治疗"></a>治疗</h1><p>在参数查看器中输入以下代码，其中nativeString是float指针的地址，将他强转成结构体查看。</p>
+<pre><code>typedef struct {         float a[1600];     } X;     X *x = (X*)nativeString; x;</code></pre><h1 id="疗效"><a href="#疗效" class="headerlink" title="疗效"></a>疗效</h1><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/17/16239026141773.jpg" alt=""></p>
+
+  </article>
+  <footer class="f-cf">
     
-      <section class="archive-category">
-        <h1 class="title">Others</h1>
-        <ul class="menu">
-          
-            <li>
-              <a href="/2021/06/17/XCode%E4%B8%AD%E6%9F%A5%E7%9C%8Bfloat%E6%95%B0%E7%BB%84/">XCode中查看float数组</a>
-              <span class="date">Jun 17, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/06/15/blender-%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E9%80%89%E4%B8%AD%E7%82%B9%E7%9A%84%E7%B4%A2%E5%BC%95/">blender 如何打印选中点的索引</a>
-              <span class="date">Jun 15, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/06/14/%E8%A7%A3%E5%86%B3SourceTree%E5%8F%8D%E5%A4%8D%E8%A6%81%E6%B1%82%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/">解决SourceTree反复要求输入密码</a>
-              <span class="date">Jun 14, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/05/13/webp-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/">webp iOS打包笔记</a>
-              <span class="date">May 13, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/05/13/Chipmunk2D-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/">Chipmunk2D iOS打包笔记</a>
-              <span class="date">May 13, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/05/13/luajit-iOS%E6%89%93%E5%8C%85%E7%AC%94%E8%AE%B0/">luajit iOS打包笔记</a>
-              <span class="date">May 13, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/05/12/xcodebuild-%E8%B8%A9%E5%9D%91%E5%92%8C%E7%96%91%E6%83%91/">xcodebuild 踩坑和疑惑</a>
-              <span class="date">May 12, 2021</span>
-            </li>
-          
-            <li>
-              <a href="/2021/05/11/iOS%E5%BA%93%E4%B8%ADbitcode%E3%80%81%E6%9E%B6%E6%9E%84%E3%80%81%E9%9D%99%E6%80%81%E5%8A%A8%E6%80%81%E7%9A%84%E5%88%A4%E6%96%AD/">iOS库中bitcode、架构、静态动态的判断</a>
-              <span class="date">May 11, 2021</span>
-            </li>
-          
-        </ul>
-      </section>
     
-  </section>
-
-
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/page/4/">&lt;span class&#x3D;&quot;iconfont icon-arrow-left&quot;&gt;&lt;&#x2F;span&gt;</a><a class="page-number" href="/categories/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/page/3/">3</a><a class="page-number" href="/categories/page/4/">4</a><span class="page-number current">5</span>
-  </nav>
-
-</div>
+      <a href="/2021/06/15/blender-%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E9%80%89%E4%B8%AD%E7%82%B9%E7%9A%84%E7%B4%A2%E5%BC%95/" class="link f-fr">blender 如何打印选中点的索引⟶</a>
+    
+  </footer>
+</section></div>
     <footer id="footer" class="f-cf">
   d.guangying@foxmail.com
   
