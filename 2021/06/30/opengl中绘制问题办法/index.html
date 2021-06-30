@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>opengl中绘制文字办法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用freetype库可以方便的加载字体库中的字符，将字符图片上传成纹理，再将纹理绘制出来。 使用文档https:&#x2F;&#x2F;learnopengl-cn.readthedocs.io&#x2F;zh&#x2F;latest&#x2F;06%20In%20Practice&#x2F;02%20Text%20Rendering&#x2F; https:&#x2F;&#x2F;learnopengl.com&#x2F;code_viewer.php?code&#x3D;in-practice&#x2F;te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="opengl中绘制文字办法">
+<meta property="og:url" content="http://yoursite.com/2021/06/30/opengl%E4%B8%AD%E7%BB%98%E5%88%B6%E9%97%AE%E9%A2%98%E5%8A%9E%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用freetype库可以方便的加载字体库中的字符，将字符图片上传成纹理，再将纹理绘制出来。 使用文档https:&#x2F;&#x2F;learnopengl-cn.readthedocs.io&#x2F;zh&#x2F;latest&#x2F;06%20In%20Practice&#x2F;02%20Text%20Rendering&#x2F; https:&#x2F;&#x2F;learnopengl.com&#x2F;code_viewer.php?code&#x3D;in-practice&#x2F;te">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/30/16250368407535.jpg">
+<meta property="article:published_time" content="2021-06-30T06:59:37.000Z">
+<meta property="article:modified_time" content="2021-06-30T07:07:32.194Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/30/16250368407535.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">opengl中绘制文字办法</h2>
+  <p class="sub">Jun 30, 2021</p>
+  <article class="content">
+    <p>使用freetype库可以方便的加载字体库中的字符，将字符图片上传成纹理，再将纹理绘制出来。</p>
+<h2 id="使用文档"><a href="#使用文档" class="headerlink" title="使用文档"></a>使用文档</h2><p><a href="https://learnopengl-cn.readthedocs.io/zh/latest/06%20In%20Practice/02%20Text%20Rendering/" target="_blank" rel="noopener">https://learnopengl-cn.readthedocs.io/zh/latest/06%20In%20Practice/02%20Text%20Rendering/</a></p>
+<p><a href="https://learnopengl.com/code_viewer.php?code=in-practice/text_rendering" target="_blank" rel="noopener">https://learnopengl.com/code_viewer.php?code=in-practice/text_rendering</a></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/06/30/16250368407535.jpg" alt=""></p>
+<h2 id="我的实现"><a href="#我的实现" class="headerlink" title="我的实现"></a>我的实现</h2><p>TextProgram.h</p>
+<pre><code>//
+//  TextProgram.hpp
+//  kiwi
+//
+//  Created by justinsong on 2021/6/28.
+//
+
+
+#pragma once
+
+#include &quot;../interface.h&quot;
+#include &lt;ai/face/Type.h&gt;
+#include &lt;list&gt;
+
+
+struct TextInfo {
+    std::string text;
+    kiwi::fvec2 coodr;
+    kiwi::fvec3 color;
+    float scale;
+};
+
+
+class TextProgram : public GLProgram {
+public:
+    void init() override;
+
+    void init(const char * fontPath);
+
+    void setTextInfo(std::list&lt;TextInfo&gt; textList);
+
+protected:
+
+    int onDraw(GLParams &amp;glParams) override;
+
+private:
+
+    void initFT(const char * fontPath);
+    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, kiwi::fvec3 color);
+
+
+    GLfloat _width = 0.0;
+    GLfloat _height = 0.0;
+    std::list&lt;TextInfo&gt; _textList;
+};
+
+</code></pre><p>TextProgram.cpp</p>
+<pre><code>//
+//  TextProgram.cpp
+//  kiwi
+//
+//  Created by justinsong on 2021/6/28.
+//
+
+#include &quot;TextProgram.h&quot;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+// FreeType
+#include &lt;ft2build.h&gt;
+#include FT_FREETYPE_H
+#include &quot;IKiwiService.h&quot;
+
+struct Character {
+    GLuint TextureID;   // ID handle of the glyph texture
+    kiwi::fvec2 Size;    // Size of glyph
+    kiwi::fvec2 Bearing;  // Offset from baseline to left/top of glyph
+    GLuint Advance;    // Horizontal offset to advance to next glyph
+};
+
+std::map&lt;GLchar, Character&gt; Characters;
+
+void TextProgram::init() {
+
+}
+
+void TextProgram::init(const char *fontPath) {
+    mProgramHandle = util::gl::createProgram(kiwi::getShader(&quot;shaders/text/text.vs&quot;), kiwi::getShader(&quot;shaders/text/text.frag&quot;));
+    initFT(fontPath);
+}
+
+void TextProgram::initFT(const char *fontPath) {
+    // FreeType
+    FT_Library ft;
+    // All functions return a value different than 0 whenever an error occurred
+    if (FT_Init_FreeType(&amp;ft))
+        std::cout &lt;&lt; &quot;ERROR::FREETYPE: Could not init FreeType Library&quot; &lt;&lt; std::endl;
+
+    // Load font as face
+    FT_Face face;
+
+    if (FT_New_Face(ft, fontPath, 0, &amp;face))
+        std::cout &lt;&lt; &quot;ERROR::FREETYPE: Failed to load font&quot; &lt;&lt; std::endl;
+
+    // Set size to load glyphs as
+    FT_Set_Pixel_Sizes(face, 0, 48);
+
+    // Disable byte-alignment restriction
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    // Load first 128 characters of ASCII set
+    for (GLubyte c = 0; c &lt; 128; c++)
+    {
+        // Load character glyph
+        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        {
+            std::cout &lt;&lt; &quot;ERROR::FREETYTPE: Failed to load Glyph&quot; &lt;&lt; std::endl;
+            continue;
+        }
+        // Generate texture
+        GLuint texture;
+        glGenTextures(1, &amp;texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(
+                     GL_TEXTURE_2D,
+                     0,
+                     GL_RED,
+                     face-&gt;glyph-&gt;bitmap.width,
+                     face-&gt;glyph-&gt;bitmap.rows,
+                     0,
+                     GL_RED,
+                     GL_UNSIGNED_BYTE,
+                     face-&gt;glyph-&gt;bitmap.buffer
+                     );
+
+        // Set texture options
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // Now store character for later use
+        Character character;
+        character.TextureID = texture;
+        character.Size = kiwi::fvec2(face-&gt;glyph-&gt;bitmap.width, face-&gt;glyph-&gt;bitmap.rows);
+        character.Bearing = kiwi::fvec2(face-&gt;glyph-&gt;bitmap_left, face-&gt;glyph-&gt;bitmap_top);
+        character.Advance = (GLuint)face-&gt;glyph-&gt;advance.x;
+
+        Characters.insert(std::pair&lt;GLchar, Character&gt;(c, character));
+    }
+    glBindTexture(GL_TEXTURE_2D, 0);
+    // Destroy FreeType once we&#39;re finished
+    FT_Done_Face(face);
+    FT_Done_FreeType(ft);
+}
+
+void TextProgram::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, kiwi::fvec3 color) {
+
+    // Iterate through all characters
+    std::string::const_iterator c;
+
+    for (c = text.begin(); c != text.end(); c++)
+    {
+        Character ch = Characters[*c];
+
+        GLfloat xpos = x + ch.Bearing.x * scale;
+        GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+        GLfloat w = ch.Size.x * scale;
+        GLfloat h = ch.Size.y * scale;
+
+        GLfloat x_w = xpos + w;
+        GLfloat y_h = ypos + h;
+        GLfloat xCoodr = xpos;
+        GLfloat yCoodr = ypos;
+
+        x_w = (x_w / _width) * 2.0 - 1;
+        y_h = (y_h / _height) * 2.0 - 1;
+        xCoodr = (xCoodr / _width) * 2.0 - 1;
+        yCoodr = (yCoodr / _height) * 2.0 - 1;
+
+        GLfloat vertxCoodr[] = {
+            x_w, y_h,
+            x_w, yCoodr,
+            xCoodr, y_h,
+            xCoodr, yCoodr
+        };
+
+        GLfloat texCoodr[] = {
+            1.0, 1.0,
+            1.0, 0.0,
+            0.0, 1.0,
+            0.0, 0.0
+        };
+
+        GLfloat clr[] = {color.x, color.y, color.z};
+
+        // Render glyph texture over quad
+        bindTexture(&quot;uTexture&quot;, ch.TextureID, 1);
+        bindCoordinate(&quot;aPosition&quot;, FULL_COORDS_PER_VERTEX, vertxCoodr);
+        bindCoordinate(&quot;aTexCoordinate&quot;, FULL_COORDS_PER_VERTEX, texCoodr);
+        setUniform3fv(&quot;textColor&quot;, 1, clr);
+
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, FULL_VERTEX_COUNT);
+
+        // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+        x += (ch.Advance &gt;&gt; 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+        GLASSERT();
+    }
+
+    GLASSERT();
+}
+
+
+int TextProgram::onDraw(GLParams &amp;glParams) {
+    glUseProgram(mProgramHandle);
+
+    _width = glParams.viewport.width;
+    _height = glParams.viewport.height;
+
+    std::list&lt;TextInfo&gt;::iterator it; //声明一个迭代器
+    for(it = _textList.begin(); it != _textList.end(); it++){
+        TextInfo textInfo = *it;
+        this-&gt;RenderText(textInfo.text, textInfo.coodr.x, textInfo.coodr.y, textInfo.scale, textInfo.color);
+    }
+
+    GLASSERT();
+    return 0;
+}
+
+void TextProgram::setTextInfo(std::list&lt;TextInfo&gt; textList) {
+    _textList = textList;
+}
+</code></pre>
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2021/06/17/XCode%E4%B8%AD%E6%9F%A5%E7%9C%8Bfloat%E6%95%B0%E7%BB%84/" class="link f-fr">XCode中查看float数组⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
