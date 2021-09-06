@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从头编译MNN iOS&amp;MacOS静态库笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="先下载代码git clone老超时,直接下载源码包，这里使用的是MNN 1.1.1 开始编译iOS MNNMNN编译步骤：   cd &#x2F;path&#x2F;to&#x2F;MNN .&#x2F;schema&#x2F;generate.sh .&#x2F;tools&#x2F;script&#x2F;get_model.sh（可选，模型仅demo工程需要）。注意get_model.sh需要事先编译好模型转换工具，参见这里。 在macOS下，用Xcode打开proje">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从头编译MNN iOS&amp;MacOS静态库笔记">
+<meta property="og:url" content="http://yoursite.com/2021/08/17/%E4%BB%8E%E5%A4%B4%E7%BC%96%E8%AF%91MNN-iOS-MacOS%E9%9D%99%E6%80%81%E5%BA%93%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="先下载代码git clone老超时,直接下载源码包，这里使用的是MNN 1.1.1 开始编译iOS MNNMNN编译步骤：   cd &#x2F;path&#x2F;to&#x2F;MNN .&#x2F;schema&#x2F;generate.sh .&#x2F;tools&#x2F;script&#x2F;get_model.sh（可选，模型仅demo工程需要）。注意get_model.sh需要事先编译好模型转换工具，参见这里。 在macOS下，用Xcode打开proje">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-17T02:24:13.000Z">
+<meta property="article:modified_time" content="2021-08-17T02:24:48.965Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">从头编译MNN iOS&amp;MacOS静态库笔记</h2>
+  <p class="sub">Aug 17, 2021</p>
+  <article class="content">
+    <h1 id="先下载代码"><a href="#先下载代码" class="headerlink" title="先下载代码"></a>先下载代码</h1><p>git clone老超时,直接下载源码包，这里使用的是MNN 1.1.1</p>
+<h1 id="开始编译iOS-MNN"><a href="#开始编译iOS-MNN" class="headerlink" title="开始编译iOS MNN"></a>开始编译iOS MNN</h1><p>MNN编译步骤：</p>
+<blockquote>
+<ol>
+<li>cd /path/to/MNN</li>
+<li>./schema/generate.sh</li>
+<li>./tools/script/get_model.sh（可选，模型仅demo工程需要）。注意get_model.sh需要事先编译好模型转换工具，参见这里。</li>
+<li>在macOS下，用Xcode打开project/ios/MNN.xcodeproj，点击编译即可<br>如果需要使用Metal后端，需要将mnn.metallib拷贝至应用的main bundle目录下，可以参考Playground应用Build Phases中的Run Script。</li>
+</ol>
+</blockquote>
+<p>源文档：文档:<a href="https://www.yuque.com/mnn/cn/build_ios" target="_blank" rel="noopener">https://www.yuque.com/mnn/cn/build_ios</a></p>
+<p>下面是我在编译中遇到的一系列问题：</p>
+<ol>
+<li><p>按着文档一步步执行,到第3步命令执行失败:</p>
+<pre><code> ➜  MNN-1.1.1 ./tools/script/get_model.sh
+ can&#39;t find ../build/MNNConvert, building converter firstly </code></pre><p>原因是需要事先编译好模型转换工具, 编译转换工具的文档:<a href="https://www.yuque.com/mnn/cn/cvrt_linux" target="_blank" rel="noopener">https://www.yuque.com/mnn/cn/cvrt_linux</a> ,照着文档一步步做,过程需要一段时间,,,,,,</p>
+</li>
+<li><p>下载模型失败</p>
+<p> 安装好模型转换工具,返回MNN更目录重新执行<code>./tools/script/get_model.sh</code>下载模型,如果不需要跑demo可以不下载,我为了方便验证MNN静态库的功能,所以要下载,过程又是一段漫长的等待,,,,,,</p>
+<p> 然而网络不行,模型下载一直失败,看看执行的这个get_model.sh脚本里写的啥,把下载的链接抠出来放浏览器下载,发现也不行,尝试了n个代理节点之后,终于成功了. 如果你也卡在这部可以试试把模型链接放到浏览器打开试试,如果打不开,就别等了,浪费生命,其中一个模型链接:<a href="https://raw.githubusercontent.com/shicai/MobileNet-Caffe/master/mobilenet.caffemodel" target="_blank" rel="noopener">https://raw.githubusercontent.com/shicai/MobileNet-Caffe/master/mobilenet.caffemodel</a> ,浏览器打开后下载不动,就是网络不行.</p>
+<p> 为了让大家不在经历和我一样的痛苦过程,我把下载好的模型打包上传了,下载后替换MNN根目录中的<code>resource</code>文件夹即可.</p>
+<pre><code> 百度网盘: https://pan.baidu.com/s/1IHd0gS72vUa_glUzRcx6vg 
+ 提取码: b2jx</code></pre></li>
+<li><p>project编译成功但没效果</p>
+<p> 下载模型完成,打开根目录下的project/ios/MNN.xcodeproj,编译运行成功,控制台输出均正常,但没有UI显示,和功能展示,心里有点不稳当,再打开根目录下demo/iOS,试试demo效果,需要先安装pod依赖,执行<code>pod install</code>,漫长的等待再次来临,,,,,</p>
+</li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2021/07/27/ios-%E6%9C%BA%E5%9E%8B%E5%8F%8A%E7%B3%BB%E7%BB%9F%E5%8D%A0%E6%AF%94%E7%BB%9F%E8%AE%A1/" class="link f-fr">ios 机型及系统占比统计⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
