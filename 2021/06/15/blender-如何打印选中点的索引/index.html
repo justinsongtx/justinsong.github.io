@@ -5,17 +5,19 @@
   
   <title>blender 如何打印选中点的索引 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="STEP1:编辑模式下选中点 STEP2：切换物体模式（object model），不切换打印不出来，二逼blender STEP3：工具栏选中python控制台，输入命令： Verts &#x3D; [i.index for i in bpy.context.active_object.data.vertices if i.select]  print(Verts)（完）">
+  <meta name="description" content="打印选中点的索引STEP1:编辑模式下选中点 STEP2：切换物体模式（object model），不切换打印不出来，二逼blender STEP3：工具栏选中python控制台，输入命令： Verts &#x3D; [i.index for i in bpy.context.active_object.data.vertices if i.select]  print(Verts)已有索引，通过控制台选中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="blender 如何打印选中点的索引">
 <meta property="og:url" content="http://yoursite.com/2021/06/15/blender-%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E9%80%89%E4%B8%AD%E7%82%B9%E7%9A%84%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="STEP1:编辑模式下选中点 STEP2：切换物体模式（object model），不切换打印不出来，二逼blender STEP3：工具栏选中python控制台，输入命令： Verts &#x3D; [i.index for i in bpy.context.active_object.data.vertices if i.select]  print(Verts)（完）">
+<meta property="og:description" content="打印选中点的索引STEP1:编辑模式下选中点 STEP2：切换物体模式（object model），不切换打印不出来，二逼blender STEP3：工具栏选中python控制台，输入命令： Verts &#x3D; [i.index for i in bpy.context.active_object.data.vertices if i.select]  print(Verts)已有索引，通过控制台选中">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/09/06/16309172817051.jpg">
 <meta property="article:published_time" content="2021-06-15T03:44:41.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:47:01.376Z">
+<meta property="article:modified_time" content="2021-09-06T08:35:08.852Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/09/06/16309172817051.jpg">
   
   <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
   <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
@@ -88,12 +90,16 @@
   <h2 class="title">blender 如何打印选中点的索引</h2>
   <p class="sub">Jun 15, 2021</p>
   <article class="content">
-    <h2 id="STEP1"><a href="#STEP1" class="headerlink" title="STEP1:"></a>STEP1:</h2><p>编辑模式下选中点</p>
-<h2 id="STEP2："><a href="#STEP2：" class="headerlink" title="STEP2："></a>STEP2：</h2><p>切换物体模式（object model），不切换打印不出来，二逼blender</p>
-<h2 id="STEP3："><a href="#STEP3：" class="headerlink" title="STEP3："></a>STEP3：</h2><p>工具栏选中python控制台，输入命令：</p>
+    <h1 id="打印选中点的索引"><a href="#打印选中点的索引" class="headerlink" title="打印选中点的索引"></a>打印选中点的索引</h1><h3 id="STEP1"><a href="#STEP1" class="headerlink" title="STEP1:"></a>STEP1:</h3><p>编辑模式下选中点</p>
+<h3 id="STEP2："><a href="#STEP2：" class="headerlink" title="STEP2："></a>STEP2：</h3><p>切换物体模式（object model），不切换打印不出来，二逼blender</p>
+<h3 id="STEP3："><a href="#STEP3：" class="headerlink" title="STEP3："></a>STEP3：</h3><p>工具栏选中python控制台，输入命令：</p>
 <pre><code>Verts = [i.index for i in bpy.context.active_object.data.vertices if i.select]
 
-print(Verts)</code></pre><p>（完）</p>
+print(Verts)</code></pre><h1 id="已有索引，通过控制台选中这些点"><a href="#已有索引，通过控制台选中这些点" class="headerlink" title="已有索引，通过控制台选中这些点"></a>已有索引，通过控制台选中这些点</h1><pre><code>keyindex = [0, 1, 2, 3]
+for i in bpy.context.active_object.data.vertices: 
+    if i.index in keyindex:
+        i.select = True</code></pre><p><img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2021/09/06/16309172817051.jpg" alt=""></p>
+<p>（完）</p>
 
   </article>
   <footer class="f-cf">
