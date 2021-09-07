@@ -100,5 +100,5 @@ theme: clover
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/justinsongtx/justinsongtx.github.io.git
+  repo: git@github.com:justinsongtx/justinsongtx.github.io.git
   branch: master
