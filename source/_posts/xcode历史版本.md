@@ -9,3 +9,6 @@ https://developer.apple.com/download/more/
 
 Xcode版本大全：
 https://xcodereleases.com/
+
+Xcode支持的mac和ios系统：
+https://developer.apple.com/cn/support/xcode/
