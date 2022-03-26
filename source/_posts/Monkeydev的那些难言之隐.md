@@ -37,10 +37,10 @@ tags:
 * 病情
     
     打不出可执行程序，clean重编，手机电脑重启，后又正常
-    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483050564373.jpg)    
+    ![w200](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483050564373.jpg)    
     
     安装失败，clean重编，手机电脑重启，后又正常
-    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483051434349.jpg)
+    ![w200](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483051434349.jpg)
 
 * 分析
     先开始怀疑是升级XCode问题，老的逆向工程重复编译运行正常，未见明显异常。
