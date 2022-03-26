@@ -37,20 +37,20 @@ tags:
 * 病情
     
     打不出可执行程序，clean重编，手机电脑重启，后又正常
-    ![](assets/16483050564373.jpg)    
+    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483050564373.jpg)    
     
     安装失败，clean重编，手机电脑重启，后又正常
-    ![](assets/16483051434349.jpg)
+    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483051434349.jpg)
 
 * 分析
     先开始怀疑是升级XCode问题，老的逆向工程重复编译运行正常，未见明显异常。
     又怀疑砸壳没砸干净，于是把本地编译的ipa丢进monkeydev，发现也这样，本地编译的ipa没有壳，这个原因也排除了。
     不是工具原因，不是ipa原因，那就是工程设置问题了，这可难受了，变成力气活了。用beyondcompare对比两个工程，一个能反复运行，一个不行，一项项对比。发现新创建的工程info.plist的key变了，而且新建的Monkeydev工程里info.plist是空的（如下图），隐隐觉得就是这个原因，填上info.plist路径（“你的app名字/Info.plist”）, 果然正常了。
-    ![](assets/16483057350303.jpg)
+    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483057350303.jpg)
 
 * 治疗
     填好info.plist路径，Build Setting->Info.plist File，填上，出院！
-    ![](assets/16483059080441.jpg)
+    ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483059080441.jpg)
 
 
 （疗程结束）
