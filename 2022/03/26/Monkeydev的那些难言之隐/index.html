@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Monkeydev的那些难言之隐 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="随着MacOS更新，XCode更新，MonkeyDev开始有各种编译问题，安装问题，开一个文章记录一下解决办法。 难言之隐——尿频 病情  编译报错，找不到libstdc++库   file not found: &#x2F;usr&#x2F;lib&#x2F;libstdc++.dylib 分析  因为XCode10之后删除了libstdc++库，而monkeydev已经很久没维护了，这货不支持新的c++库。  治疗  下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monkeydev的那些难言之隐">
+<meta property="og:url" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="随着MacOS更新，XCode更新，MonkeyDev开始有各种编译问题，安装问题，开一个文章记录一下解决办法。 难言之隐——尿频 病情  编译报错，找不到libstdc++库   file not found: &#x2F;usr&#x2F;lib&#x2F;libstdc++.dylib 分析  因为XCode10之后删除了libstdc++库，而monkeydev已经很久没维护了，这货不支持新的c++库。  治疗  下载">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16483050564373.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16483051434349.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16483057350303.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16483059080441.jpg">
+<meta property="article:published_time" content="2022-03-26T14:09:42.000Z">
+<meta property="article:modified_time" content="2022-03-26T14:52:23.971Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16483050564373.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Monkeydev的那些难言之隐</h2>
+  <p class="sub">Mar 26, 2022</p>
+  <article class="content">
+    <p>随着MacOS更新，XCode更新，MonkeyDev开始有各种编译问题，安装问题，开一个文章记录一下解决办法。</p>
+<h3 id="难言之隐——尿频"><a href="#难言之隐——尿频" class="headerlink" title="难言之隐——尿频"></a>难言之隐——尿频</h3><ul>
+<li><p>病情<br>  编译报错，找不到libstdc++库</p>
+<pre><code>  file not found: /usr/lib/libstdc++.dylib</code></pre></li>
+<li><p>分析<br>  因为XCode10之后删除了libstdc++库，而monkeydev已经很久没维护了，这货不支持新的c++库。</p>
+</li>
+<li><p>治疗<br>  下载libstdc++库，放到XCode里<br>  <a href="https://github.com/devdawei/libstdc-" target="_blank" rel="noopener">https://github.com/devdawei/libstdc-</a></p>
+</li>
+</ul>
+<h3 id="难言之隐——尿急"><a href="#难言之隐——尿急" class="headerlink" title="难言之隐——尿急"></a>难言之隐——尿急</h3><ul>
+<li><p>病情<br>  运行crash，在fishhook.c里面</p>
+</li>
+<li><p>分析<br>  看不出来原因，网上一搜，解决了</p>
+</li>
+<li><p>治疗<br>  下载最新的fishhook，替换工程中的文件<br>  <a href="https://github.com/facebook/fishhook" target="_blank" rel="noopener">https://github.com/facebook/fishhook</a></p>
+</li>
+</ul>
+<h3 id="难言之隐——尿不尽"><a href="#难言之隐——尿不尽" class="headerlink" title="难言之隐——尿不尽"></a>难言之隐——尿不尽</h3><ul>
+<li><p>病情</p>
+<p>  打不出可执行程序，clean重编，手机电脑重启，后又正常<br>  <img src="assets/16483050564373.jpg" alt="">    </p>
+<p>  安装失败，clean重编，手机电脑重启，后又正常<br>  <img src="assets/16483051434349.jpg" alt=""></p>
+</li>
+<li><p>分析<br>  先开始怀疑是升级XCode问题，老的逆向工程重复编译运行正常，未见明显异常。<br>  又怀疑砸壳没砸干净，于是把本地编译的ipa丢进monkeydev，发现也这样，本地编译的ipa没有壳，这个原因也排除了。<br>  不是工具原因，不是ipa原因，那就是工程设置问题了，这可难受了，变成力气活了。用beyondcompare对比两个工程，一个能反复运行，一个不行，一项项对比。发现新创建的工程info.plist的key变了，而且新建的Monkeydev工程里info.plist是空的（如下图），隐隐觉得就是这个原因，填上info.plist路径（“你的app名字/Info.plist”）, 果然正常了。<br>  <img src="assets/16483057350303.jpg" alt=""></p>
+</li>
+<li><p>治疗<br>  填好info.plist路径，Build Setting-&gt;Info.plist File，填上，出院！<br>  <img src="assets/16483059080441.jpg" alt=""></p>
+</li>
+</ul>
+<p>（疗程结束）</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2022/03/07/ARKit%E6%9C%BA%E5%9E%8B%E5%8F%8A%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82/" class="link f-fr">ARKit机型及系统要求⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
