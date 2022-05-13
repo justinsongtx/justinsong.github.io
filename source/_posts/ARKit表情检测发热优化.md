@@ -62,4 +62,32 @@ config.frameSemantics = ARFrameSemanticNone;
 
 [https://developer.apple.com/forums/thread/113797](https://developer.apple.com/forums/thread/113797)
 
-只做表情检测，不需要渲染摄像头捕捉的图片时，我们并不需要ARSCNView，网上文章说它是ARCamera和ARSession的桥梁。后来发现没有它，ARSession也能独立检测表情，干掉ARSCNView省去上屏渲染的能耗，顺便去掉对视图树的依赖。不用ARSCNView的表情检测写法：
+```swift
+import ARKit
+
+class ViewController: UIViewController, ARSessionDelegate {
+   
+    let session = ARSession()
+   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+        session.run(ARFaceTrackingConfiguration())
+        session.delegate = self
+       
+    }
+   
+   
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        print(anchors)
+    }
+   
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        for anchor in anchors {
+            if let faceAnchor = anchor as? ARFaceAnchor {
+                print(faceAnchor.blendShapes[ARFaceAnchor.BlendShapeLocation.mouthClose])
+            }
+        }
+    }
+}
+```
