@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ARKit表情检测发热优化 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ARKit 表情检测发热优化背景使用ARKit检测表情时时长发烫，找了一些优化办法，记在这里 优化1：降低帧率和分辨率帖子： https:&#x2F;&#x2F;developer.apple.com&#x2F;forums&#x2F;thread&#x2F;704304?answerId&#x3D;710540022#710540022 ARKit会提供几种不同的videoFormat, 其中包含30帧 60帧，1080p和720p采集，选择30帧和72">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARKit表情检测发热优化">
+<meta property="og:url" content="http://yoursite.com/2022/05/13/ARKit%E8%A1%A8%E6%83%85%E6%A3%80%E6%B5%8B%E5%8F%91%E7%83%AD%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ARKit 表情检测发热优化背景使用ARKit检测表情时时长发烫，找了一些优化办法，记在这里 优化1：降低帧率和分辨率帖子： https:&#x2F;&#x2F;developer.apple.com&#x2F;forums&#x2F;thread&#x2F;704304?answerId&#x3D;710540022#710540022 ARKit会提供几种不同的videoFormat, 其中包含30帧 60帧，1080p和720p采集，选择30帧和72">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-13T03:40:57.000Z">
+<meta property="article:modified_time" content="2022-05-13T03:43:19.576Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">ARKit表情检测发热优化</h2>
+  <p class="sub">May 13, 2022</p>
+  <article class="content">
+    <h1 id="ARKit-表情检测发热优化"><a href="#ARKit-表情检测发热优化" class="headerlink" title="ARKit 表情检测发热优化"></a>ARKit 表情检测发热优化</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>使用ARKit检测表情时时长发烫，找了一些优化办法，记在这里</p>
+<h1 id="优化1：降低帧率和分辨率"><a href="#优化1：降低帧率和分辨率" class="headerlink" title="优化1：降低帧率和分辨率"></a>优化1：降低帧率和分辨率</h1><p>帖子：</p>
+<p><a href="https://developer.apple.com/forums/thread/704304?answerId=710540022#710540022" target="_blank" rel="noopener">https://developer.apple.com/forums/thread/704304?answerId=710540022#710540022</a></p>
+<p>ARKit会提供几种不同的videoFormat, 其中包含30帧 60帧，1080p和720p采集，选择30帧和720p对降低能耗有很大作用。</p>
+<pre><code class="swift">let configuration = ARFaceTrackingConfiguration()
+for format in ARFaceTrackingConfiguration.supportedVideoFormats {
+
+    // Use the framesPerSecond and imageResolution properties of the format to make your selection.
+    if selectionCriteriaIsMet {
+        configuration.videoFormat = format
+        break
+    }
+}
+
+session.run(configuration)</code></pre>
+<h1 id="优化2：关闭不需要的开关"><a href="#优化2：关闭不需要的开关" class="headerlink" title="优化2：关闭不需要的开关"></a>优化2：关闭不需要的开关</h1><p>做表情检测时不需要world track，那就不要开worldTrackingEnabled；不需要光源数据就关掉lightEstimationEnabled；不需要音频数据就关掉providesAudioData；不需要额外的检测如人像分割、人体dect，就关掉frameSemantics。只做表情检测，不需要的其他开关一律关掉, 如下代码</p>
+<pre><code class="swift">// 初始化配置
+ARFaceTrackingConfiguration *config = [[ARFaceTrackingConfiguration alloc] init];
+// 选择30帧&amp;最小分辨率
+config.videoFormat = [self getMinVideoFormat];
+// 限制检测人脸数
+config.maximumNumberOfTrackedFaces = 1;
+// 关掉光照估计，默认开
+config.lightEstimationEnabled = NO;
+// anchor位置从摄像头视角出发
+config.worldAlignment = ARWorldAlignmentCamera;
+// 关掉音频数据，默认关
+config.providesAudioData = NO;
+// 关掉世界跟踪，默认关
+config.worldTrackingEnabled = NO;
+// 关掉帧检测（人像分割，人体检测等等），默认关
+config.frameSemantics = ARFrameSemanticNone;</code></pre>
+<h1 id="优化3：干掉ARSCNView"><a href="#优化3：干掉ARSCNView" class="headerlink" title="优化3：干掉ARSCNView"></a>优化3：干掉ARSCNView</h1><p>感谢gchiste大神的帖子，才让我找到了干掉ARSCNView的办法，帖子：</p>
+<p><a href="https://developer.apple.com/forums/thread/100403?answerId=354629022#354629022" target="_blank" rel="noopener">https://developer.apple.com/forums/thread/100403?answerId=354629022#354629022</a></p>
+<p><a href="https://developer.apple.com/forums/thread/113797" target="_blank" rel="noopener">https://developer.apple.com/forums/thread/113797</a></p>
+<p>只做表情检测，不需要渲染摄像头捕捉的图片时，我们并不需要ARSCNView，网上文章说它是ARCamera和ARSession的桥梁。后来发现没有它，ARSession也能独立检测表情，干掉ARSCNView省去上屏渲染的能耗，顺便去掉对视图树的依赖。不用ARSCNView的表情检测写法：</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/" class="link f-fr">Monkeydev的那些难言之隐⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
