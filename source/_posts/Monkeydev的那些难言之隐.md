@@ -52,5 +52,23 @@ tags:
     填好info.plist路径，Build Setting->Info.plist File，填上，出院！
     ![](https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483059080441.jpg)
 
+### 难言之隐——前列腺肥大
+
+* 病情
+    'Cycript/Cycript.h' file not found  
+    
+    ![](assets/16566665016623.jpg)
+
+* 分析
+    找不到Cycript.framework, 这玩意在theos里面，妈的，不知道为什么找不到了，也没链接这个framework。
+
+* 治疗
+    找到Cycript.framework，一般在"~/Users/zego/opt/theos/vendor/lib"里面, 把这个东西复制到工程里面或者"~/Users/zego/opt/MonkeyDev/Frameworks/"下面。
+    ![](assets/16566667483184.jpg)
+
+    把Cycript.framework拖进工程，链接到app target上面，注意链接顺序要在lib之前。
+    ![](assets/16566674108754.jpg)
+
+    编译-》运行-》出院！
 
 （疗程结束）

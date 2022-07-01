@@ -13,7 +13,7 @@
 <meta property="og:description" content="ARKit 表情检测发热优化背景使用ARKit检测表情时时长发烫，找了一些优化办法，记在这里 优化1：降低帧率和分辨率帖子： https:&#x2F;&#x2F;developer.apple.com&#x2F;forums&#x2F;thread&#x2F;704304?answerId&#x3D;710540022#710540022 ARKit会提供几种不同的videoFormat, 其中包含30帧 60帧，1080p和720p采集，选择30帧和72">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-13T03:40:57.000Z">
-<meta property="article:modified_time" content="2022-05-13T03:43:19.576Z">
+<meta property="article:modified_time" content="2022-05-13T03:48:20.866Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -123,7 +123,33 @@ config.frameSemantics = ARFrameSemanticNone;</code></pre>
 <h1 id="优化3：干掉ARSCNView"><a href="#优化3：干掉ARSCNView" class="headerlink" title="优化3：干掉ARSCNView"></a>优化3：干掉ARSCNView</h1><p>感谢gchiste大神的帖子，才让我找到了干掉ARSCNView的办法，帖子：</p>
 <p><a href="https://developer.apple.com/forums/thread/100403?answerId=354629022#354629022" target="_blank" rel="noopener">https://developer.apple.com/forums/thread/100403?answerId=354629022#354629022</a></p>
 <p><a href="https://developer.apple.com/forums/thread/113797" target="_blank" rel="noopener">https://developer.apple.com/forums/thread/113797</a></p>
-<p>只做表情检测，不需要渲染摄像头捕捉的图片时，我们并不需要ARSCNView，网上文章说它是ARCamera和ARSession的桥梁。后来发现没有它，ARSession也能独立检测表情，干掉ARSCNView省去上屏渲染的能耗，顺便去掉对视图树的依赖。不用ARSCNView的表情检测写法：</p>
+<pre><code class="swift">import ARKit
+
+class ViewController: UIViewController, ARSessionDelegate {
+
+    let session = ARSession()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        session.run(ARFaceTrackingConfiguration())
+        session.delegate = self
+
+    }
+
+
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        print(anchors)
+    }
+
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        for anchor in anchors {
+            if let faceAnchor = anchor as? ARFaceAnchor {
+                print(faceAnchor.blendShapes[ARFaceAnchor.BlendShapeLocation.mouthClose])
+            }
+        }
+    }
+}</code></pre>
 
   </article>
   <footer class="f-cf">
