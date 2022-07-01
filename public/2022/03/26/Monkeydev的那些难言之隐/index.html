@@ -16,8 +16,11 @@
 <meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483051434349.jpg">
 <meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483057350303.jpg">
 <meta property="og:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483059080441.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16566665016623.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16566667483184.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/03/26/Monkeydev%E7%9A%84%E9%82%A3%E4%BA%9B%E9%9A%BE%E8%A8%80%E4%B9%8B%E9%9A%90/assets/16566674108754.jpg">
 <meta property="article:published_time" content="2022-03-26T14:09:42.000Z">
-<meta property="article:modified_time" content="2022-03-26T14:57:52.635Z">
+<meta property="article:modified_time" content="2022-07-01T09:23:49.003Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483050564373.jpg">
@@ -118,6 +121,17 @@
 <li><p>分析<br>  先开始怀疑是升级XCode问题，老的逆向工程重复编译运行正常，未见明显异常。<br>  又怀疑砸壳没砸干净，于是把本地编译的ipa丢进monkeydev，发现也这样，本地编译的ipa没有壳，这个原因也排除了。<br>  不是工具原因，不是ipa原因，那就是工程设置问题了，这可难受了，变成力气活了。用beyondcompare对比两个工程，一个能反复运行，一个不行，一项项对比。发现新创建的工程info.plist的key变了，而且新建的Monkeydev工程里info.plist是空的（如下图），隐隐觉得就是这个原因，填上info.plist路径（“你的app名字/Info.plist”）, 果然正常了。<br>  <img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483057350303.jpg" alt=""></p>
 </li>
 <li><p>治疗<br>  填好info.plist路径，Build Setting-&gt;Info.plist File，填上，出院！<br>  <img src="https://mweb-image-1259394369.cos.ap-guangzhou.myqcloud.com/2022/03/26/16483059080441.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="难言之隐——前列腺肥大"><a href="#难言之隐——前列腺肥大" class="headerlink" title="难言之隐——前列腺肥大"></a>难言之隐——前列腺肥大</h3><ul>
+<li><p>病情<br>  ‘Cycript/Cycript.h’ file not found  </p>
+<p>  <img src="assets/16566665016623.jpg" alt=""></p>
+</li>
+<li><p>分析<br>  找不到Cycript.framework, 这玩意在theos里面，妈的，不知道为什么找不到了，也没链接这个framework。</p>
+</li>
+<li><p>治疗<br>  找到Cycript.framework，一般在”<del>/Users/zego/opt/theos/vendor/lib”里面, 把这个东西复制到工程里面或者”</del>/Users/zego/opt/MonkeyDev/Frameworks/“下面。<br>  <img src="assets/16566667483184.jpg" alt=""></p>
+<p>  把Cycript.framework拖进工程，链接到app target上面，注意链接顺序要在lib之前。<br>  <img src="assets/16566674108754.jpg" alt=""></p>
+<p>  编译-》运行-》出院！</p>
 </li>
 </ul>
 <p>（疗程结束）</p>
